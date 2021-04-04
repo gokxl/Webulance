@@ -53,9 +53,9 @@
     function loginSubmit() {
         const cb = document.getElementById('isadmin');
         if (cb.checked == true) {
-            document.loginForm.action = "adminIndex.php"
+            document.loginForm.action = "hospitalIndex.php"
         } else {
-            document.loginForm.action = "index2.php"
+            document.loginForm.action = "patientsIndex.php"
         }
         document.loginForm.submit(); // Submit the page
         return true;
