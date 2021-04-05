@@ -12,7 +12,7 @@ h2 { font-size: 18px; }
 #main { padding-right: 600px; }
 .infoWindow { width: 220px; }
 </style>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ9hFR0sbAl0CnMCxneTGr0x_WP_n5cXU&callback=myMap"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7TAtKUw8VuLhGXXyC_C_YN_NZS2OXBj4&callback=myMap"></script>
 <script type="text/javascript">
 //<![CDATA[
 
@@ -62,6 +62,8 @@ if(navigator.geolocation) {
 navigator.geolocation.getCurrentPosition(function(position) {
 
 var userLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+
+alert(userLocation);
 
 geocoder.geocode( { 'latLng': userLocation }, function(results, status) {
     alert(status)

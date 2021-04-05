@@ -43,7 +43,7 @@
     </div>
     <div class="bottom-action clearfix">
         <label class="float-left form-check-label"><input type="checkbox" name="isadmin" id="isadmin"> Login as
-            Admin</label>
+            Hospital-Service</label>
         <a href="#" class="float-right">Forgot Password?</a>
     </div>
 </form>

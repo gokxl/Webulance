@@ -64,7 +64,7 @@ if (
         // Create a new WebSocket.
         console.log("about to establish web socket connection");
 
-        var socket = new WebSocket('ws://9830204a488b.ngrok.io');
+        var socket = new WebSocket('ws://cbeb4f76d6e4.ngrok.io');
 
         socket.onopen = function(e) {
             console.log("Connection established!");

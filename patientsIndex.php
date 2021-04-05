@@ -66,12 +66,13 @@ if (
 
 <body>
     <input type="text" id="message" />
+    <input type="text" id="message1" />
     <button onclick="transmitMessage()">Send</button>
     <script>
         // Create a new WebSocket.
         console.log("about to establish web socket connection");
 
-        var socket = new WebSocket('ws://9830204a488b.ngrok.io');
+        var socket = new WebSocket('ws://cbeb4f76d6e4.ngrok.io');
 
         socket.onopen = function(e) {
             console.log("Connection established!");
@@ -82,6 +83,7 @@ if (
 
         function transmitMessage() {
             socket.send(message.value);
+            socket.send(message1.value);
         }
 
         socket.onmessage = function(e) {
