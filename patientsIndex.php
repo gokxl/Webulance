@@ -65,6 +65,7 @@ if (
 </head>
 
 <body>
+
     <input type="text" id="message" />
     <input type="text" id="message1" />
     <button onclick="transmitMessage()">Send</button>
@@ -83,7 +84,6 @@ if (
 
         function transmitMessage() {
             socket.send(message.value);
-            socket.send(message1.value);
         }
 
         socket.onmessage = function(e) {

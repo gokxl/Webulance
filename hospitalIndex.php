@@ -59,7 +59,10 @@ if (
 
 <body>
     <input type="text" id="message" />
+    <input type="text" id="message1" />
     <button onclick="transmitMessage()">Send</button>
+    <button id="myButton" class="float-left submit-button">Home</button>
+
     <script>
         // Create a new WebSocket.
         console.log("about to establish web socket connection");
@@ -78,8 +81,13 @@ if (
         }
 
         socket.onmessage = function(e) {
-            alert(e.data);
+            console.log(e.data);
+            document.getElementById('message1').value = e.data;
         }
+
+        document.getElementById("myButton").onclick = function() {
+            location.href = "http://633a0d6588fb.ngrok.io/MapsBackUp.html";
+        };
     </script>
 </body>
 
