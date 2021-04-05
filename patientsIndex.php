@@ -33,7 +33,7 @@ if (
     try {
         $db = new PDO("mysql:host=$host", $user, $password, $options);
 
-        $sql_select = "Select * from $t_patients where cust_username =  '$uid' and cust_pwd = '$pwd'";
+        $sql_select = "Select * from $t_patients where pat_username =  '$uid' and pat_pwd = '$pwd'";
         //echo "SQL Statement is : $sql_select <BR>";
 
         $stmt = $db->prepare($sql_select);
