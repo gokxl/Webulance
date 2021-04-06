@@ -65,22 +65,30 @@ if (
 </head>
 
 <body>
-
-    <input type="text" id="message" />
-    <input type="text" id="message1" />
+    
+    <select name="EmergencyType" id="EmergencyType" >
+        <option value="volvo">Serious Injuries</option>
+        <option value="Serious Injuries">Cardiac arrests</option>
+        <option value="Respiratory">Respiratory</option>
+        <option value="Diabetics">Diabetics</option>
+        <option value="Unconsciousness">Unconsciousness</option>
+        <option value="Animal bites">Animal bites</option>
+        <option value="Infections">Infections</option>
+    </select>
     <button onclick="transmitMessage()">Send</button>
+
     <script>
         // Create a new WebSocket.
         console.log("about to establish web socket connection");
 
-        var socket = new WebSocket('ws://cbeb4f76d6e4.ngrok.io');
+        var socket = new WebSocket('ws://b743f06b12f6.ngrok.io');
 
         socket.onopen = function(e) {
             console.log("Connection established!");
         };
 
         // Define the 
-        var message = document.getElementById('message');
+        var message = document.getElementById('EmergencyType');
 
         function transmitMessage() {
             socket.send(message.value);

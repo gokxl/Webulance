@@ -67,7 +67,7 @@ if (
         // Create a new WebSocket.
         console.log("about to establish web socket connection");
 
-        var socket = new WebSocket('ws://cbeb4f76d6e4.ngrok.io');
+        var socket = new WebSocket('ws://b743f06b12f6.ngrok.io');
 
         socket.onopen = function(e) {
             console.log("Connection established!");
@@ -81,12 +81,21 @@ if (
         }
 
         socket.onmessage = function(e) {
-            console.log(e.data);
-            document.getElementById('message1').value = e.data;
+            var div = document.createElement("div");
+            div.setAttribute("id", "Div1");
+            div.style.color = "white";
+            document.body.appendChild(div);
+            var x = document.createElement("INPUT");
+            x.setAttribute("type", "text");
+            x.value = e.data
+            document.getElementById("Div1").appendChild(x);
+            var y = document.createElement("BR");
+            document.getElementById("Div1").appendChild(y);
+            //document.getElementById('message1').value = e.data;
         }
 
         document.getElementById("myButton").onclick = function() {
-            location.href = "http://633a0d6588fb.ngrok.io/MapsBackUp.html";
+            location.href = "http://3007f8e97f51.ngrok.io/MapsBackUp.html";
         };
     </script>
 </body>
