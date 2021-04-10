@@ -319,9 +319,9 @@ class PHPMailer
 
     /**
      * Whether to use SMTP authentication.
-     * Uses the Username and Password properties.
+     * Uses the PatName and Password properties.
      *
-     * @see PHPMailer::$Username
+     * @see PHPMailer::$PatName
      * @see PHPMailer::$Password
      *
      * @var bool
@@ -336,11 +336,11 @@ class PHPMailer
     public $SMTPOptions = [];
 
     /**
-     * SMTP username.
+     * SMTP PatName.
      *
      * @var string
      */
-    public $Username = '';
+    public $PatName = '';
 
     /**
      * SMTP password.
@@ -2122,7 +2122,7 @@ class PHPMailer
                     }
                     if (
                         $this->SMTPAuth && !$this->smtp->authenticate(
-                            $this->Username,
+                            $this->PatName,
                             $this->Password,
                             $this->AuthType,
                             $this->oauth

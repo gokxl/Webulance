@@ -35,7 +35,7 @@ final class UriNormalizer
      * hyphen (%2D), period (%2E), underscore (%5F), or tilde (%7E) should not be created by URI producers and,
      * when found in a URI, should be decoded to their corresponding unreserved characters by URI normalizers.
      *
-     * Example: http://example.org/%7Eusern%61me/ → http://example.org/~username/
+     * Example: http://example.org/%7Eusern%61me/ → http://example.org/~PatName/
      */
     const DECODE_UNRESERVED_CHARACTERS = 2;
 

@@ -25,7 +25,7 @@
                     <span class="fa fa-user"></span>
                 </span>
             </div>
-            <input type="text" name="uid" id="uid" class="form-control" placeholder="Username" required="required">
+            <input type="text" name="uid" id="uid" class="form-control" placeholder="PatName" required="required">
         </div>
     </div>
     <div class="form-group">

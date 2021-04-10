@@ -33,7 +33,7 @@ if (
     try {
         $db = new PDO("mysql:host=$host", $user, $password, $options);
 
-        $sql_select = "Select * from $t_patients where pat_username =  '$uid' and pat_pwd = '$pwd'";
+        $sql_select = "Select * from $t_patients where pat_PatName =  '$uid' and pat_pwd = '$pwd'";
         //echo "SQL Statement is : $sql_select <BR>";
 
         $stmt = $db->prepare($sql_select);
@@ -44,7 +44,7 @@ if (
             $_SESSION['uid'] = $_POST["uid"];
             $_SESSION["pwd"] = $_POST["pwd"];
         } else {
-            echo '<script>alert("Invalid Username or Password. Try again")</script>';
+            echo '<script>alert("Invalid PatName or Password. Try again")</script>';
         }
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -67,8 +67,8 @@ if (
 <body>
     
     <select name="EmergencyType" id="EmergencyType" >
-        <option value="volvo">Serious Injuries</option>
-        <option value="Serious Injuries">Cardiac arrests</option>
+        <option value="Serious Injuries">Serious Injuries</option>
+        <option value="Cardiac arrests">Cardiac arrests</option>
         <option value="Respiratory">Respiratory</option>
         <option value="Diabetics">Diabetics</option>
         <option value="Unconsciousness">Unconsciousness</option>
@@ -81,7 +81,7 @@ if (
         // Create a new WebSocket.
         console.log("about to establish web socket connection");
 
-        var socket = new WebSocket('ws://b743f06b12f6.ngrok.io');
+        var socket = new WebSocket('ws://c8b20779a4f6.ngrok.io');
 
         socket.onopen = function(e) {
             console.log("Connection established!");

@@ -108,9 +108,9 @@ class PdoSessionHandler extends AbstractSessionHandler
     private $timeCol = 'sess_time';
 
     /**
-     * @var string Username when lazy-connect
+     * @var string PatName when lazy-connect
      */
-    private $username = '';
+    private $PatName = '';
 
     /**
      * @var string Password when lazy-connect
@@ -161,7 +161,7 @@ class PdoSessionHandler extends AbstractSessionHandler
      *  * db_data_col: The column where to store the session data [default: sess_data]
      *  * db_lifetime_col: The column where to store the lifetime [default: sess_lifetime]
      *  * db_time_col: The column where to store the timestamp [default: sess_time]
-     *  * db_username: The username when lazy-connect [default: '']
+     *  * db_PatName: The PatName when lazy-connect [default: '']
      *  * db_password: The password when lazy-connect [default: '']
      *  * db_connection_options: An array of driver-specific connection options [default: []]
      *  * lock_mode: The strategy for locking, see constants [default: LOCK_TRANSACTIONAL]
@@ -190,7 +190,7 @@ class PdoSessionHandler extends AbstractSessionHandler
         $this->dataCol = $options['db_data_col'] ?? $this->dataCol;
         $this->lifetimeCol = $options['db_lifetime_col'] ?? $this->lifetimeCol;
         $this->timeCol = $options['db_time_col'] ?? $this->timeCol;
-        $this->username = $options['db_username'] ?? $this->username;
+        $this->PatName = $options['db_PatName'] ?? $this->PatName;
         $this->password = $options['db_password'] ?? $this->password;
         $this->connectionOptions = $options['db_connection_options'] ?? $this->connectionOptions;
         $this->lockMode = $options['lock_mode'] ?? $this->lockMode;
@@ -435,7 +435,7 @@ class PdoSessionHandler extends AbstractSessionHandler
      */
     private function connect(string $dsn): void
     {
-        $this->pdo = new \PDO($dsn, $this->username, $this->password, $this->connectionOptions);
+        $this->pdo = new \PDO($dsn, $this->PatName, $this->password, $this->connectionOptions);
         $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         $this->driver = $this->pdo->getAttribute(\PDO::ATTR_DRIVER_NAME);
     }
@@ -458,9 +458,9 @@ class PdoSessionHandler extends AbstractSessionHandler
 
         $params = array_map('rawurldecode', $params);
 
-        // Override the default username and password. Values passed through options will still win over these in the constructor.
+        // Override the default PatName and password. Values passed through options will still win over these in the constructor.
         if (isset($params['user'])) {
-            $this->username = $params['user'];
+            $this->PatName = $params['user'];
         }
 
         if (isset($params['pass'])) {

@@ -25,7 +25,7 @@ if (
         $db = new PDO("mysql:host=$host", $user, $password, $options);
         //echo "Database connected successfully <BR>";
 
-        $sql_select = "Select * from $t_hospital where hos_username = '$uid' and hos_pwd = '$pwd'";
+        $sql_select = "Select * from $t_hospital where hos_PatName = '$uid' and hos_pwd = '$pwd'";
 
         $stmt = $db->prepare($sql_select);
         $stmt->execute();
@@ -36,7 +36,7 @@ if (
             $_SESSION["pwd"] = $pwd;
             $_SESSION["isadmin"] = TRUE;
         } else {
-            echo '<script>alert("Invalid Username or Password. Try again")</script>';
+            echo '<script>alert("Invalid PatName or Password. Try again")</script>';
         }
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -67,7 +67,7 @@ if (
         // Create a new WebSocket.
         console.log("about to establish web socket connection");
 
-        var socket = new WebSocket('ws://b743f06b12f6.ngrok.io');
+        var socket = new WebSocket('ws://c8b20779a4f6.ngrok.io');
 
         socket.onopen = function(e) {
             console.log("Connection established!");
@@ -81,13 +81,15 @@ if (
         }
 
         socket.onmessage = function(e) {
+            //var object = JSON.parse(e.data);
             var div = document.createElement("div");
             div.setAttribute("id", "Div1");
             div.style.color = "white";
             document.body.appendChild(div);
+            //document.getElementById("Div1").appendChild(object);
             var x = document.createElement("INPUT");
             x.setAttribute("type", "text");
-            x.value = e.data
+            x.value = e;
             document.getElementById("Div1").appendChild(x);
             var y = document.createElement("BR");
             document.getElementById("Div1").appendChild(y);

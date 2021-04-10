@@ -55,7 +55,7 @@ class OAuth
      *
      * @var string
      */
-    protected $oauthUserEmail = '';
+    protected $oauthPatEmailId = '';
 
     /**
      * The client secret, generated in the app definition of the service you're connecting to.
@@ -82,12 +82,12 @@ class OAuth
      * OAuth constructor.
      *
      * @param array $options Associative array containing
-     *                       `provider`, `userName`, `clientSecret`, `clientId` and `refreshToken` elements
+     *                       `provider`, `PatName`, `clientSecret`, `clientId` and `refreshToken` elements
      */
     public function __construct($options)
     {
         $this->provider = $options['provider'];
-        $this->oauthUserEmail = $options['userName'];
+        $this->oauthPatEmailId = $options['PatName'];
         $this->oauthClientSecret = $options['clientSecret'];
         $this->oauthClientId = $options['clientId'];
         $this->oauthRefreshToken = $options['refreshToken'];
@@ -130,7 +130,7 @@ class OAuth
 
         return base64_encode(
             'user=' .
-            $this->oauthUserEmail .
+            $this->oauthPatEmailId .
             "\001auth=Bearer " .
             $this->oauthToken .
             "\001\001"

@@ -96,11 +96,11 @@ class POP3
     public $tval;
 
     /**
-     * POP3 username.
+     * POP3 PatName.
      *
      * @var string
      */
-    public $username;
+    public $PatName;
 
     /**
      * POP3 password.
@@ -163,7 +163,7 @@ class POP3
      * @param string   $host        The hostname to connect to
      * @param int|bool $port        The port number to connect to
      * @param int|bool $timeout     The timeout value
-     * @param string   $username
+     * @param string   $PatName
      * @param string   $password
      * @param int      $debug_level
      *
@@ -173,13 +173,13 @@ class POP3
         $host,
         $port = false,
         $timeout = false,
-        $username = '',
+        $PatName = '',
         $password = '',
         $debug_level = 0
     ) {
         $pop = new self();
 
-        return $pop->authorise($host, $port, $timeout, $username, $password, $debug_level);
+        return $pop->authorise($host, $port, $timeout, $PatName, $password, $debug_level);
     }
 
     /**
@@ -190,13 +190,13 @@ class POP3
      * @param string   $host        The hostname to connect to
      * @param int|bool $port        The port number to connect to
      * @param int|bool $timeout     The timeout value
-     * @param string   $username
+     * @param string   $PatName
      * @param string   $password
      * @param int      $debug_level
      *
      * @return bool
      */
-    public function authorise($host, $port = false, $timeout = false, $username = '', $password = '', $debug_level = 0)
+    public function authorise($host, $port = false, $timeout = false, $PatName = '', $password = '', $debug_level = 0)
     {
         $this->host = $host;
         //If no port value provided, use default
@@ -212,14 +212,14 @@ class POP3
             $this->tval = (int) $timeout;
         }
         $this->do_debug = $debug_level;
-        $this->username = $username;
+        $this->PatName = $PatName;
         $this->password = $password;
         //Reset the error log
         $this->errors = [];
         //Connect
         $result = $this->connect($this->host, $this->port, $this->tval);
         if ($result) {
-            $login_result = $this->login($this->username, $this->password);
+            $login_result = $this->login($this->PatName, $this->password);
             if ($login_result) {
                 $this->disconnect();
 
@@ -299,25 +299,25 @@ class POP3
      * Log in to the POP3 server.
      * Does not support APOP (RFC 2828, 4949).
      *
-     * @param string $username
+     * @param string $PatName
      * @param string $password
      *
      * @return bool
      */
-    public function login($username = '', $password = '')
+    public function login($PatName = '', $password = '')
     {
         if (!$this->connected) {
             $this->setError('Not connected to POP3 server');
         }
-        if (empty($username)) {
-            $username = $this->username;
+        if (empty($PatName)) {
+            $PatName = $this->PatName;
         }
         if (empty($password)) {
             $password = $this->password;
         }
 
-        //Send the Username
-        $this->sendString("USER $username" . static::LE);
+        //Send the PatName
+        $this->sendString("USER $PatName" . static::LE);
         $pop3_response = $this->getResponse();
         if ($this->checkResponse($pop3_response)) {
             //Send the Password

@@ -92,7 +92,7 @@
                                 <span class="fa fa-user"></span>
                             </span>
                         </div>
-                        <input type="text" name="puser" id="puser" class="form-control" placeholder="patients Username" required="required">
+                        <input type="text" name="puser" id="puser" class="form-control" placeholder="patients PatName" required="required">
                     </div>
                 </div>
             </div>
