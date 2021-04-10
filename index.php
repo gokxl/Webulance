@@ -90,7 +90,7 @@
       </div>
     </section>
     <section class="right-pane">
-      <div class="card">
+      <form class="card" name="loginForm" method="POST">
         <h2>Login</h2>
         <h6>Please enter your credentials</h6>
         <input
@@ -116,13 +116,12 @@
             Login as service provider
           </label>
         </div>
-        <button type="submit">Login</button>
-       
+        <button type="submit" onclick="return loginSubmit();">Login</button>
         <h6>
           Don't have an account?
           <a href="./addRegistration.php">Create account</a>
         </h6>
-      </div>
+      </form>
     </section>
     <script language="Javascript">
       function loginSubmit() {
@@ -132,7 +131,7 @@
         } else {
           document.loginForm.action = 'patientsIndex.php'
         }
-        document.loginForm.submit() // Submit the page
+        document.loginForm.submit()
         return true
       }
     </script>
