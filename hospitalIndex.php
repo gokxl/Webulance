@@ -25,7 +25,7 @@ if (
         $db = new PDO("mysql:host=$host", $user, $password, $options);
         //echo "Database connected successfully <BR>";
 
-        $sql_select = "Select * from $t_hospital where hos_PatName = '$uid' and hos_pwd = '$pwd'";
+        $sql_select = "Select * from $t_hospital where hos_name = '$uid' and hos_pwd = '$pwd'";
 
         $stmt = $db->prepare($sql_select);
         $stmt->execute();
@@ -89,7 +89,7 @@ if (
             //document.getElementById("Div1").appendChild(object);
             var x = document.createElement("INPUT");
             x.setAttribute("type", "text");
-            x.value = e;
+            x.value = e.data;
             document.getElementById("Div1").appendChild(x);
             var y = document.createElement("BR");
             document.getElementById("Div1").appendChild(y);

@@ -22,7 +22,7 @@ if (
     $uid = $_POST['uid'];
     $pwd = $_POST['pwd'];
 
-    include './config.php';
+    include 'config.php';
     //set table name based on local or remote connection
     if ($connection == "local") {
         $t_patients = "patients";
@@ -33,13 +33,16 @@ if (
     try {
         $db = new PDO("mysql:host=$host", $user, $password, $options);
 
-        $sql_select = "Select * from $t_patients where pat_PatName =  '$uid' and pat_pwd = '$pwd'";
-        //echo "SQL Statement is : $sql_select <BR>";
+        $sql_select = "Select * from $t_patients where pat_username =  '$uid' and pat_pwd = '$pwd'";
+        echo "SQL Statement is : $sql_select <BR>";
+        echo "SQL Connection is : $host <BR>";
+
 
         $stmt = $db->prepare($sql_select);
         $stmt->execute();
 
         if ($rows = $stmt->fetch()) {
+            //echo "SQL Statement is : $rows <BR>";
             $_SESSION['valid'] = TRUE;
             $_SESSION['uid'] = $_POST["uid"];
             $_SESSION["pwd"] = $_POST["pwd"];

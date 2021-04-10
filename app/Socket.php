@@ -36,7 +36,7 @@ class Socket implements MessageComponentInterface
             if ($from->resourceId == $client->resourceId) {
                 continue;
             }
-            global $myObj;
+
             /*require 'config.php';
 
             try {
