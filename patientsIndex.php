@@ -2,6 +2,7 @@
 
 session_start();
 
+
 if (isset($_SESSION["uid"])) {
     $uid = $_SESSION["uid"];
 }
@@ -18,7 +19,6 @@ if (
     isset($_POST["login"]) && !empty($_POST["uid"])
     && !empty($_POST["pwd"])
 ) {
-
     $uid = $_POST['uid'];
     $pwd = $_POST['pwd'];
 
@@ -34,8 +34,8 @@ if (
         $db = new PDO("mysql:host=$host", $user, $password, $options);
 
         $sql_select = "Select * from $t_patients where pat_username =  '$uid' and pat_pwd = '$pwd'";
-        echo "SQL Statement is : $sql_select <BR>";
-        echo "SQL Connection is : $host <BR>";
+        //echo "SQL Statement is : $sql_select <BR>";
+        //echo "SQL Connection is : $host <BR>";
 
 
         $stmt = $db->prepare($sql_select);
@@ -47,7 +47,9 @@ if (
             $_SESSION['uid'] = $_POST["uid"];
             $_SESSION["pwd"] = $_POST["pwd"];
         } else {
-            echo '<script>alert("Invalid PatName or Password. Try again")</script>';
+            echo '<script> alert("Invalid PatName or Password. Try again");</script>';
+            header('refresh:0; url=./index.php');
+            exit();
         }
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -55,52 +57,57 @@ if (
     }
 }
 ?>
-<html>
 
-<head>
-    <meta charset="UTF-8">
-    <style>
-        input,
-        button {
-            padding: 10px;
-        }
-    </style>
-</head>
+<?php
+if (isset($_SESSION["uid"])) {
+?>
+    <html>
 
-<body>
-    
-    <select name="EmergencyType" id="EmergencyType" >
-        <option value="Serious Injuries">Serious Injuries</option>
-        <option value="Cardiac arrests">Cardiac arrests</option>
-        <option value="Respiratory">Respiratory</option>
-        <option value="Diabetics">Diabetics</option>
-        <option value="Unconsciousness">Unconsciousness</option>
-        <option value="Animal bites">Animal bites</option>
-        <option value="Infections">Infections</option>
-    </select>
-    <button onclick="transmitMessage()">Send</button>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            input,
+            button {
+                padding: 10px;
+            }
+        </style>
+    </head>
 
-    <script>
-        // Create a new WebSocket.
-        console.log("about to establish web socket connection");
+    <body>
 
-        var socket = new WebSocket('ws://c8b20779a4f6.ngrok.io');
+        <select name="EmergencyType" id="EmergencyType">
+            <option value="Serious Injuries">Serious Injuries</option>
+            <option value="Cardiac arrests">Cardiac arrests</option>
+            <option value="Respiratory">Respiratory</option>
+            <option value="Diabetics">Diabetics</option>
+            <option value="Unconsciousness">Unconsciousness</option>
+            <option value="Animal bites">Animal bites</option>
+            <option value="Infections">Infections</option>
+        </select>
+        <button onclick="transmitMessage()">Send</button>
 
-        socket.onopen = function(e) {
-            console.log("Connection established!");
-        };
+        <script>
+            // Create a new WebSocket.
+            console.log("about to establish web socket connection");
 
-        // Define the 
-        var message = document.getElementById('EmergencyType');
+            var socket = new WebSocket('ws://c8b20779a4f6.ngrok.io');
 
-        function transmitMessage() {
-            socket.send(message.value);
-        }
+            socket.onopen = function(e) {
+                console.log("Connection established!");
+            };
 
-        socket.onmessage = function(e) {
-            alert(e.data);
-        }
-    </script>
-</body>
+            // Define the 
+            var message = document.getElementById('EmergencyType');
 
-</html>
+            function transmitMessage() {
+                socket.send(message.value);
+            }
+
+            socket.onmessage = function(e) {
+                alert(e.data);
+            }
+        </script>
+    </body>
+
+    </html>
+<?php } ?>

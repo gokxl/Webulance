@@ -25,7 +25,7 @@ if (
         $db = new PDO("mysql:host=$host", $user, $password, $options);
         //echo "Database connected successfully <BR>";
 
-        $sql_select = "Select * from $t_hospital where hos_name = '$uid' and hos_pwd = '$pwd'";
+        $sql_select = "Select * from $t_hospital where hos_username = '$uid' and hos_pwd = '$pwd'";
 
         $stmt = $db->prepare($sql_select);
         $stmt->execute();
@@ -36,7 +36,11 @@ if (
             $_SESSION["pwd"] = $pwd;
             $_SESSION["isadmin"] = TRUE;
         } else {
-            echo '<script>alert("Invalid PatName or Password. Try again")</script>';
+            //echo '<script>alert("Invalid PatName or Password. Try again")</script>';
+            echo '<script>alert("Invalid PatName or Password. TTTTTry again")</script>';
+
+            header('refresh:0; url=./index.php');
+            exit();
         }
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -44,6 +48,10 @@ if (
     }
 }
 
+?>
+
+<?php
+if (isset($_SESSION["uid"])) {
 ?>
 <html>
 
@@ -103,3 +111,6 @@ if (
 </body>
 
 </html>
+<?php
+}
+?>
