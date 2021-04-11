@@ -75,7 +75,7 @@ if (isset($_SESSION["uid"])) {
         // Create a new WebSocket.
         console.log("about to establish web socket connection");
 
-        var socket = new WebSocket('ws://cf66d9b1f6bf.ngrok.io');
+        var socket = new WebSocket('ws://55fa451405a5.ngrok.io');
 
         socket.onopen = function(e) {
             console.log("Connection established!");
@@ -107,12 +107,17 @@ if (isset($_SESSION["uid"])) {
             var z = document.createElement("INPUT");
             z.setAttribute("type", "text");
             z.value = object.text2;
+            var w = document.createElement("INPUT");
+            w.setAttribute("type", "text");
+            w.value = object.text3;
             document.getElementById("Div1").appendChild(x);
             var br = document.createElement("BR");
             document.getElementById("Div1").appendChild(br);
             document.getElementById("Div1").appendChild(y);
             document.getElementById("Div1").appendChild(br);
             document.getElementById("Div1").appendChild(z);
+            document.getElementById("Div1").appendChild(br);
+            document.getElementById("Div1").appendChild(w);
             //document.getElementById('message1').value = e.data;
         }
 
