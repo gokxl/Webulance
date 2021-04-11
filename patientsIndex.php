@@ -32,7 +32,7 @@ if (
 
     try {
         $db = new PDO("mysql:host=$host", $user, $password, $options);
-
+        
         $sql_select = "Select * from $t_patients where pat_username =  '$uid' and pat_pwd = '$pwd'";
         //echo "SQL Statement is : $sql_select <BR>";
         //echo "SQL Connection is : $host <BR>";
@@ -96,7 +96,7 @@ if (isset($_SESSION["uid"])) {
             // Create a new WebSocket.
             console.log("about to establish web socket connection");
 
-            var socket = new WebSocket('ws://cf66d9b1f6bf.ngrok.io');
+            var socket = new WebSocket('ws://55fa451405a5.ngrok.io');
 
             socket.onopen = function(e) {
                 console.log("Connection established!");
@@ -104,7 +104,7 @@ if (isset($_SESSION["uid"])) {
 
             // Define the 
             var HospitalName = 'Manipal';
-
+            
             function makeRequest(url, callback) {
                 var request;
                 if (window.XMLHttpRequest) {
@@ -121,19 +121,24 @@ if (isset($_SESSION["uid"])) {
                 request.send();
             }
 
-            function transmitMessage() {
-                makeRequest("get_ambulance.php?q=" + HospitalName, function(data) {
+            function transmitMessage() {    
+                makeRequest("get_ambulance.php?q="+HospitalName, function(data) {
 
                     var data = JSON.parse(data.responseText);
                     var x = document.createElement("INPUT");
                     x.setAttribute("type", "text");
                     x.value = data.driver_name;
+                    var y = document.createElement("INPUT");
+                    y.setAttribute("type", "text");
+                    y.value = data.ambulance_Registration;
                     document.body.appendChild(x);
+                    document.body.appendChild(y);
                     var message = {
                         type: "message",
                         text: document.getElementById("EmergencyType").value,
                         text1: document.getElementById("cars").value,
                         text2: data.driver_name,
+                        text3: data.ambulance_Registration,
                         date: Date.now()
                     };
                     socket.send(JSON.stringify(message));

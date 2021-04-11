@@ -33,7 +33,7 @@ try {
     $db = new PDO("mysql:host=$host", $user, $password, $options);
     //echo "Database connected successfully <BR>";
 
-    $sql_insert = "INSERT INTO $t_patients (pat_name,pat_pwd,pat_email_id,pat_ph_no,pat_age,pat_gender,pat_PatName)  
+    $sql_insert = "INSERT INTO $t_patients (pat_name,pat_pwd,pat_email_id,pat_ph_no,pat_age,pat_gender,pat_username)  
         VALUES ('$pname', '$ppwd' , '$pemail','$pphone', $page , '$pgender' ,'$puser' )";
     echo "$sql_insert <br>";
     echo "query insertion begins here<br>";
