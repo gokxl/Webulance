@@ -24,7 +24,7 @@ class Socket implements MessageComponentInterface
 
         // Store the new connection in $this->clients
         $this->clients->attach($conn);
-
+        //echo "New connection! ({$conn})\n";
         echo "New connection! ({$conn->resourceId})\n";
     }
 
@@ -64,7 +64,7 @@ class Socket implements MessageComponentInterface
             echo "Client $from->resourceId said $msg";
             //$client->send($myJSON );
             //$client->send(json_encode($sth, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
-            $client->send("Client $from->resourceId said $msg");
+            $client->send("$msg");
         }
     }
 

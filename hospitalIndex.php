@@ -75,10 +75,11 @@ if (isset($_SESSION["uid"])) {
         // Create a new WebSocket.
         console.log("about to establish web socket connection");
 
-        var socket = new WebSocket('ws://c8b20779a4f6.ngrok.io');
+        var socket = new WebSocket('ws://cf66d9b1f6bf.ngrok.io');
 
         socket.onopen = function(e) {
             console.log("Connection established!");
+            socket.send("Hi da");
         };
 
         // Define the 
@@ -89,7 +90,9 @@ if (isset($_SESSION["uid"])) {
         }
 
         socket.onmessage = function(e) {
-            //var object = JSON.parse(e.data);
+            console.log(e.data);
+            var object = JSON.parse(e.data);
+            var time = new Date(object.date);
             var div = document.createElement("div");
             div.setAttribute("id", "Div1");
             div.style.color = "white";
@@ -97,10 +100,19 @@ if (isset($_SESSION["uid"])) {
             //document.getElementById("Div1").appendChild(object);
             var x = document.createElement("INPUT");
             x.setAttribute("type", "text");
-            x.value = e.data;
+            x.value = object.text;
+            var y = document.createElement("INPUT");
+            y.setAttribute("type", "text");
+            y.value = object.text1;
+            var z = document.createElement("INPUT");
+            z.setAttribute("type", "text");
+            z.value = object.text2;
             document.getElementById("Div1").appendChild(x);
-            var y = document.createElement("BR");
+            var br = document.createElement("BR");
+            document.getElementById("Div1").appendChild(br);
             document.getElementById("Div1").appendChild(y);
+            document.getElementById("Div1").appendChild(br);
+            document.getElementById("Div1").appendChild(z);
             //document.getElementById('message1').value = e.data;
         }
 

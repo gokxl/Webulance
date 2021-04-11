@@ -84,23 +84,60 @@ if (isset($_SESSION["uid"])) {
             <option value="Animal bites">Animal bites</option>
             <option value="Infections">Infections</option>
         </select>
+        <select name="cars" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
         <button onclick="transmitMessage()">Send</button>
 
         <script>
             // Create a new WebSocket.
             console.log("about to establish web socket connection");
 
-            var socket = new WebSocket('ws://c8b20779a4f6.ngrok.io');
+            var socket = new WebSocket('ws://cf66d9b1f6bf.ngrok.io');
 
             socket.onopen = function(e) {
                 console.log("Connection established!");
             };
 
             // Define the 
-            var message = document.getElementById('EmergencyType');
+            var HospitalName = 'Manipal';
+
+            function makeRequest(url, callback) {
+                var request;
+                if (window.XMLHttpRequest) {
+                    request = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                } else {
+                    request = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                }
+                request.onreadystatechange = function() {
+                    if (request.readyState == 4 && request.status == 200) {
+                        callback(request);
+                    }
+                }
+                request.open("GET", url, true);
+                request.send();
+            }
 
             function transmitMessage() {
-                socket.send(message.value);
+                makeRequest("get_ambulance.php?q=" + HospitalName, function(data) {
+
+                    var data = JSON.parse(data.responseText);
+                    var x = document.createElement("INPUT");
+                    x.setAttribute("type", "text");
+                    x.value = data.driver_name;
+                    document.body.appendChild(x);
+                    var message = {
+                        type: "message",
+                        text: document.getElementById("EmergencyType").value,
+                        text1: document.getElementById("cars").value,
+                        text2: data.driver_name,
+                        date: Date.now()
+                    };
+                    socket.send(JSON.stringify(message));
+                });
             }
 
             socket.onmessage = function(e) {
