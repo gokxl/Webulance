@@ -20,14 +20,16 @@
     <section class="right-pane">
       <form class="card" name="loginForm" method="POST">
         <h2>Login</h2>
-        <h6>Please enter your credentials</h6>
+        <h6 id="msg">Please enter your credentials</h6>
         <input
           type="text"
           name="uid"
           id="uid"
           class="form-control"
           placeholder="Username"
-          required="required"
+          min="3"
+          max="10"
+          required
         />
         <input
           type="password"
@@ -35,7 +37,9 @@
           id="pwd"
           class="form-control"
           placeholder="Password"
-          required="required"
+          min="5"
+          max="10"
+          required
         />
         <div>
           <input type="checkbox" name="isadmin" id="isadmin" /><label
@@ -44,17 +48,30 @@
             Login as service provider
           </label>
         </div>
-        <button type="submit" name="login" onclick="return loginSubmit();">
+        <button type="submit" name="login" onclick="return validateForm();">
           Login
         </button>
-        <h6 class='footer'>
+        <h6 class="footer">
           Don't have an account?
           <a href="./addRegistration.php">Create account</a>
         </h6>
       </form>
     </section>
     <script language="Javascript">
-      function loginSubmit() {
+      const validateForm = () => {
+        const uName = document.getElementById('uid')
+        const pass = document.getElementById('pwd')
+        if (!uName.checkValidity() || !pass.checkValidity()) {
+          document.getElementById('msg').innerHTML =
+            'Invalid username or password'
+          document.getElementById('msg').style.color = 'red'
+        } else {
+          return loginSubmit()
+        }
+        return false
+      }
+
+      const loginSubmit = () => {
         const cb = document.getElementById('isadmin')
         if (cb.checked == true) {
           document.loginForm.action = 'hospitalIndex.php'
