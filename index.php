@@ -47,7 +47,7 @@
         <button type="submit" name="login" onclick="return loginSubmit();">
           Login
         </button>
-        <h6>
+        <h6 class='footer'>
           Don't have an account?
           <a href="./addRegistration.php">Create account</a>
         </h6>
