@@ -55,6 +55,7 @@ nav img {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .info {
@@ -97,4 +98,33 @@ button {
   width: 100%;
   font-size: 16px;
   cursor: pointer;
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.card .top-row,
+.card .bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field {
+  margin: 1rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.modify {
+  overflow-y: scroll;
+  height: 60%;
 }
