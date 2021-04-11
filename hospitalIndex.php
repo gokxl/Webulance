@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 session_start();
 
@@ -52,82 +52,67 @@ if (
 
 <?php
 if (isset($_SESSION["uid"])) {
-?>
+?> -->
 <html>
+  <head>
+    <title>Register</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./assets/css/register.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <style>
-        input,
-        button {
-            padding: 10px;
-        }
-    </style>
-</head>
+  <body>
+    <!-- <script>
+      // Create a new WebSocket.
+      console.log('about to establish web socket connection')
 
-<body>
-    <input type="text" id="message" />
-    <input type="text" id="message1" />
-    <button onclick="transmitMessage()">Send</button>
-    <button id="myButton" class="float-left submit-button">Home</button>
+      var socket = new WebSocket('ws://cf66d9b1f6bf.ngrok.io')
 
-    <script>
-        // Create a new WebSocket.
-        console.log("about to establish web socket connection");
+      socket.onopen = function (e) {
+        console.log('Connection established!')
+        socket.send('Hi da')
+      }
 
-        var socket = new WebSocket('ws://55fa451405a5.ngrok.io');
+      // Define the
+      var message = document.getElementById('message')
 
-        socket.onopen = function(e) {
-            console.log("Connection established!");
-            socket.send("Hi da");
-        };
+      function transmitMessage() {
+        socket.send(message.value)
+      }
 
-        // Define the 
-        var message = document.getElementById('message');
+      socket.onmessage = function (e) {
+        console.log(e.data)
+        var object = JSON.parse(e.data)
+        var time = new Date(object.date)
+        var div = document.createElement('div')
+        div.setAttribute('id', 'Div1')
+        div.style.color = 'white'
+        document.body.appendChild(div)
+        //document.getElementById("Div1").appendChild(object);
+        var x = document.createElement('INPUT')
+        x.setAttribute('type', 'text')
+        x.value = object.text
+        var y = document.createElement('INPUT')
+        y.setAttribute('type', 'text')
+        y.value = object.text1
+        var z = document.createElement('INPUT')
+        z.setAttribute('type', 'text')
+        z.value = object.text2
+        document.getElementById('Div1').appendChild(x)
+        var br = document.createElement('BR')
+        document.getElementById('Div1').appendChild(br)
+        document.getElementById('Div1').appendChild(y)
+        document.getElementById('Div1').appendChild(br)
+        document.getElementById('Div1').appendChild(z)
+        //document.getElementById('message1').value = e.data;
+      }
 
-        function transmitMessage() {
-            socket.send(message.value);
-        }
-
-        socket.onmessage = function(e) {
-            console.log(e.data);
-            var object = JSON.parse(e.data);
-            var time = new Date(object.date);
-            var div = document.createElement("div");
-            div.setAttribute("id", "Div1");
-            div.style.color = "white";
-            document.body.appendChild(div);
-            //document.getElementById("Div1").appendChild(object);
-            var x = document.createElement("INPUT");
-            x.setAttribute("type", "text");
-            x.value = object.text;
-            var y = document.createElement("INPUT");
-            y.setAttribute("type", "text");
-            y.value = object.text1;
-            var z = document.createElement("INPUT");
-            z.setAttribute("type", "text");
-            z.value = object.text2;
-            var w = document.createElement("INPUT");
-            w.setAttribute("type", "text");
-            w.value = object.text3;
-            document.getElementById("Div1").appendChild(x);
-            var br = document.createElement("BR");
-            document.getElementById("Div1").appendChild(br);
-            document.getElementById("Div1").appendChild(y);
-            document.getElementById("Div1").appendChild(br);
-            document.getElementById("Div1").appendChild(z);
-            document.getElementById("Div1").appendChild(br);
-            document.getElementById("Div1").appendChild(w);
-            //document.getElementById('message1').value = e.data;
-        }
-
-        document.getElementById("myButton").onclick = function() {
-            location.href = "http://3007f8e97f51.ngrok.io/MapsBackUp.html";
-        };
-    </script>
-</body>
-
+      document.getElementById('myButton').onclick = function () {
+        location.href = 'http://3007f8e97f51.ngrok.io/MapsBackUp.html'
+      }
+    </script> -->
+  </body>
 </html>
-<?php
+<!-- <?php
 }
-?>
+?> -->
