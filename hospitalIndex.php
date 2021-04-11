@@ -157,7 +157,7 @@ if (isset($_SESSION["uid"])) {
             document.getElementById('myButton').onclick = function() {
                 location.href = 'http://3007f8e97f51.ngrok.io/MapsBackUp.html'
             }
-        </script> -->
+        </script> 
     </body>
 
     </html>
