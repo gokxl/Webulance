@@ -27,8 +27,6 @@
           id="uid"
           class="form-control"
           placeholder="Username"
-          min="3"
-          max="10"
           required
         />
         <input
@@ -37,18 +35,13 @@
           id="pwd"
           class="form-control"
           placeholder="Password"
-          min="5"
-          max="10"
           required
         />
         <div>
-          <input type="checkbox" name="isadmin" id="isadmin" /><label
-            for="isadmin"
-          >
-            Login as service provider
-          </label>
+          <input type="checkbox" name="isadmin" id="isadmin" />
+          <label for="isadmin">Login as service provider </label>
         </div>
-        <button type="submit" name="login" onclick="return validateForm();">
+        <button type="button" name="login" onclick="return loginSubmit();">
           Login
         </button>
         <h6 class="footer">
@@ -58,19 +51,6 @@
       </form>
     </section>
     <script language="Javascript">
-      const validateForm = () => {
-        const uName = document.getElementById('uid')
-        const pass = document.getElementById('pwd')
-        if (!uName.checkValidity() || !pass.checkValidity()) {
-          document.getElementById('msg').innerHTML =
-            'Invalid username or password'
-          document.getElementById('msg').style.color = 'red'
-        } else {
-          return loginSubmit()
-        }
-        return false
-      }
-
       const loginSubmit = () => {
         const cb = document.getElementById('isadmin')
         if (cb.checked == true) {

@@ -6,173 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./assets/css/register.css" />
   </head>
+
   <body>
-    <!-- <form action="./insertRegistration.php" method="post">
-      <h2 class="text-center">Registration Form</h2>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <span class="fa fa-user"></span>
-                  </span>
-                </div>
-                <input
-                  type="text"
-                  name="pname"
-                  id="pname"
-                  class="form-control"
-                  placeholder="patients Name"
-                  required="required"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="fa fa-list-ol"></i>
-                  </span>
-                </div>
-                <input
-                  type="number"
-                  name="page"
-                  id="page"
-                  class="form-control"
-                  placeholder="patients Age"
-                  required="required"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <select
-                class="form-control"
-                id="pgender"
-                name="pgender"
-                placeholder="Select Gender"
-              >
-                <option>m</option>
-                <option>f</option>
-                <option>t</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <span class="fa fa-envelope"></span>
-                  </span>
-                </div>
-                <input
-                  type="email"
-                  name="pemail"
-                  id="pemail"
-                  class="form-control"
-                  placeholder="patients Email"
-                  required="required"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <span class="fa fa-mobile"></span>
-                  </span>
-                </div>
-                <input
-                  type="tel"
-                  name="pphone"
-                  id="pphone"
-                  class="form-control"
-                  placeholder="patients Mobile Number"
-                  required="required"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <span class="fa fa-user"></span>
-                  </span>
-                </div>
-                <input
-                  type="text"
-                  name="puser"
-                  id="puser"
-                  class="form-control"
-                  placeholder="patients PatName"
-                  required="required"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="fa fa-lock"></i>
-                  </span>
-                </div>
-                <input
-                  type="password"
-                  name="ppwd"
-                  id="ppwd"
-                  class="form-control"
-                  placeholder="Password"
-                  required="required"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="fa fa-lock"></i>
-                  </span>
-                </div>
-                <input
-                  type="password"
-                  name="ppwd1"
-                  id="ppwd1"
-                  class="form-control"
-                  placeholder="Confirm Password"
-                  required="required"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <button type="submit" name="register" class="btn btn-primary btn-block">
-          Register
-        </button>
-      </div>
-    </form> -->
-    <form action="./insertRegistration.php" method="post" class='card'>
-      <h2 class='header'>Sign Up as a Patient</h2>
-      <h6 class="info">Please enter your details</h6>
+    <form
+      name="registerForm"
+      action="./insertRegistration.php"
+      method="post"
+      class="card"
+    >
+      <h2 class="header">Sign Up as a Patient</h2>
+      <h6 class="info" id="info">Please enter your details</h6>
       <input
         type="text"
         name="pname"
@@ -180,13 +23,21 @@
         placeholder="Full Name"
         required
       />
-      <div class='grp'>
-      <input type="number" name="page" id="page" placeholder="Age" required />
-      <select id="pgender" name="pgender">
-        <option value="m">Male</option>
-        <option value="f">Female</option>
-        <option value="t">Others</option>
-      </select>
+      <div class="grp">
+        <input
+          type="number"
+          name="page"
+          id="page"
+          placeholder="Age"
+          min="0"
+          max="100"
+          required
+        />
+        <select id="pgender" name="pgender">
+          <option value="m">Male</option>
+          <option value="f">Female</option>
+          <option value="t">Others</option>
+        </select>
       </div>
       <input
         type="email"
@@ -215,6 +66,8 @@
         id="ppwd"
         class="form-control"
         placeholder="Password"
+        min="3"
+        max="15"
         required
       />
       <input
@@ -222,9 +75,67 @@
         name="ppwd1"
         id="ppwd1"
         placeholder="Confirm Password"
+        min="3"
+        max="15"
         required
       />
-      <button type="submit" name="register">Register</button>
+      <button type="button" name="register" onclick="return onSubmit();">
+        Register
+      </button>
     </form>
   </body>
+  <script>
+    const onSubmit = () => {
+      let error = ''
+
+      /** Validate password */
+      const pass = document.querySelector('#ppwd')
+      const pass2 = document.querySelector('#ppwd1')
+      const regEx = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/)
+      if (!pass.checkValidity() || !regEx.test(pass.value)) {
+        error =
+          'Password should have one lowercase, one uppercase, one digit (3-15 characters)'
+      } else if (pass.value !== pass2.value) {
+        /** Check for matching passwords */
+        error = 'Your passwords do not match'
+      }
+
+      /** Validate username */
+      const uname = document.querySelector('#puser')
+      if (!uname.checkValidity()) {
+        error = 'Username should be between 3-15 characters'
+      }
+
+      /** Validate phone number */
+      const pNo = document.querySelector('#pphone')
+      if (!pNo.checkValidity()) {
+        error = 'Mobile number should be 10 digits'
+      }
+
+      /** Validate email */
+      const email = document.querySelector('#pemail')
+      if (!email.checkValidity()) {
+        error = 'Invalid email entered'
+      }
+
+      /** Validate age */
+      const age = document.querySelector('#page')
+      if (!age.checkValidity()) {
+        error = 'Invalid age entered'
+      }
+
+      /** Validate Patient Name */
+      const fullName = document.querySelector('#pname')
+      if (fullName.value.split(/\W+/).length !== 2) {
+        error = 'Please enter your full name'
+      }
+
+      if (error === '') document.registerForm.submit()
+      else {
+        const info = document.querySelector('#info')
+        info.textContent = error
+        info.style.color = 'red'
+      }
+    }
+  </script>
 </html>
