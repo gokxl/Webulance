@@ -52,16 +52,27 @@ if (
 
 <?php
 //if (isset($_SESSION["uid"])) {
-?> 
+?>
 <html>
-  <head>
+
+<head>
     <title>Register</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./assets/css/register.css" />
-  </head>
+</head>
 
-  <body>
+<body>
+    <nav>
+        <h3>Webulance</h3>
+        <a href="./logout.php">
+            <img src="./assets/vectors/logout.svg" alt="Logout" height="20" />
+            Logout
+        </a>
+    </nav>
+    <section class="main">
+        <h1 class="empty">No active requests</h1>
+    </section>
     <!-- <script>
       // Create a new WebSocket.
       console.log('about to establish web socket connection')
@@ -111,8 +122,9 @@ if (
         location.href = 'http://3007f8e97f51.ngrok.io/MapsBackUp.html'
       }
     </script> -->
-  </body>
+</body>
+
 </html>
 <!-- <?php
-//}
-?> -->
+        //}
+        ?> -->
