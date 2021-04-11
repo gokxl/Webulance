@@ -1,6 +1,6 @@
-<!-- <?php
+<?php
 
-session_start();
+/*session_start();
 
 if (isset($_SESSION["uid"])) {
     $uid = $_SESSION["uid"];
@@ -46,13 +46,13 @@ if (
         print "Error!: " . $e->getMessage() . "<br/>";
         die();
     }
-}
+}*/
 
 ?>
 
 <?php
-if (isset($_SESSION["uid"])) {
-?> -->
+//if (isset($_SESSION["uid"])) {
+?> 
 <html>
   <head>
     <title>Register</title>
@@ -114,5 +114,5 @@ if (isset($_SESSION["uid"])) {
   </body>
 </html>
 <!-- <?php
-}
+//}
 ?> -->
