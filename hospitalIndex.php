@@ -58,10 +58,19 @@ if (isset($_SESSION["uid"])) {
     <title>Register</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./assets/css/register.css" />
+    <link rel="stylesheet" href="./assets/css/hospital.css" />
   </head>
-
   <body>
+    <nav>
+      <h3>Webulance</h3>
+      <a href="./logout.php">
+        <img src="./assets/vectors/logout.svg" alt="Logout" height="20" />
+        Logout
+      </a>
+    </nav>
+    <section class="main">
+      <h1 class="empty">No active requests</h1>
+    </section>
     <!-- <script>
       // Create a new WebSocket.
       console.log('about to establish web socket connection')
