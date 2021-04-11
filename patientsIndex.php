@@ -96,7 +96,7 @@ if (isset($_SESSION["uid"])) {
             // Create a new WebSocket.
             console.log("about to establish web socket connection");
 
-            var socket = new WebSocket('ws://55fa451405a5.ngrok.io');
+            var socket = new WebSocket('ws://8ca3082517d7.ngrok.io');
 
             socket.onopen = function(e) {
                 console.log("Connection established!");

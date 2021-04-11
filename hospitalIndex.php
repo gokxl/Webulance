@@ -1,6 +1,6 @@
 <?php
 
-/*session_start();
+session_start();
 
 if (isset($_SESSION["uid"])) {
     $uid = $_SESSION["uid"];
@@ -46,84 +46,120 @@ if (
         print "Error!: " . $e->getMessage() . "<br/>";
         die();
     }
-}*/
+}
 
 ?>
 
 <?php
-//if (isset($_SESSION["uid"])) {
+if (isset($_SESSION["uid"])) {
 ?>
-<html>
+    <html>
 
-<head>
-    <title>Register</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./assets/css/hospital.css" />
-  </head>
-  <body>
-    <nav>
-      <h3>Webulance</h3>
-      <a href="./logout.php">
-        <img src="./assets/vectors/logout.svg" alt="Logout" height="20" />
-        Logout
-      </a>
-    </nav>
-    <section class="main">
-      <h1 class="empty">No active requests</h1>
-    </section>
-    <!-- <script>
-      // Create a new WebSocket.
-      console.log('about to establish web socket connection')
+    <head>
+        <title>Register</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="./assets/css/hospital.css" />
+    </head>
 
-      var socket = new WebSocket('ws://cf66d9b1f6bf.ngrok.io')
+    <body>
+        <nav>
+            <h3>Webulance</h3>
+            <a href="./logout.php">
+                <img src="./assets/vectors/logout.svg" alt="Logout" height="20" />
+                Logout
+            </a>
+        </nav>
+        <section class="main">
+            <h1 class="empty">No active requests</h1>
+        </section>
+        <script>
+            // Create a new WebSocket.
+            console.log('about to establish web socket connection')
 
-      socket.onopen = function (e) {
-        console.log('Connection established!')
-        socket.send('Hi da')
-      }
+            var socket = new WebSocket('ws://8ca3082517d7.ngrok.io')
 
-      // Define the
-      var message = document.getElementById('message')
+            socket.onopen = function(e) {
+                console.log('Connection established!')
+                socket.send('Hi da')
+            }
 
-      function transmitMessage() {
-        socket.send(message.value)
-      }
+            // Define the
+            var message = document.getElementById('message')
 
-      socket.onmessage = function (e) {
-        console.log(e.data)
-        var object = JSON.parse(e.data)
-        var time = new Date(object.date)
-        var div = document.createElement('div')
-        div.setAttribute('id', 'Div1')
-        div.style.color = 'white'
-        document.body.appendChild(div)
-        //document.getElementById("Div1").appendChild(object);
-        var x = document.createElement('INPUT')
-        x.setAttribute('type', 'text')
-        x.value = object.text
-        var y = document.createElement('INPUT')
-        y.setAttribute('type', 'text')
-        y.value = object.text1
-        var z = document.createElement('INPUT')
-        z.setAttribute('type', 'text')
-        z.value = object.text2
-        document.getElementById('Div1').appendChild(x)
-        var br = document.createElement('BR')
-        document.getElementById('Div1').appendChild(br)
-        document.getElementById('Div1').appendChild(y)
-        document.getElementById('Div1').appendChild(br)
-        document.getElementById('Div1').appendChild(z)
-        //document.getElementById('message1').value = e.data;
-      }
+            function transmitMessage() {
+                socket.send(message.value)
+            }
 
-      document.getElementById('myButton').onclick = function () {
-        location.href = 'http://3007f8e97f51.ngrok.io/MapsBackUp.html'
-      }
-    </script> -->
-</body>
+            socket.onmessage = function(e) {
+                console.log(e.data)
+                var object = JSON.parse(e.data)
+                /*var time = new Date(object.date)
+                var div = document.createElement('div')
+                div.setAttribute('id', 'Div1')
+                div.style.color = 'white'
+                document.body.appendChild(div)
+                //document.getElementById("Div1").appendChild(object);
+                var x = document.createElement('INPUT')
+                x.setAttribute('type', 'text')
+                x.value = object.text
+                var y = document.createElement('INPUT')
+                y.setAttribute('type', 'text')
+                y.value = object.text1
+                var z = document.createElement('INPUT')
+                z.setAttribute('type', 'text')
+                z.value = object.text2
+                document.getElementById('Div1').appendChild(x)
+                var br = document.createElement('BR')
+                document.getElementById('Div1').appendChild(br)
+                document.getElementById('Div1').appendChild(y)
+                document.getElementById('Div1').appendChild(br)
+                document.getElementById('Div1').appendChild(z)
+                //document.getElementById('message1').value = e.data;*/
+                const emptyHeader = document.querySelector('.empty')
+                emptyHeader.remove()
+                const docElem = document.querySelector('.main')
+                docElem.insertAdjacentHTML('beforeend',`<div class="card">
+        <div class="top-row">
+          <div class="field">
+            <span class="bold">Type of Emergency:</span>
+            <span>${object.text}</span>
+          </div>
+          <div class="field">
+            <span class="bold">Vehicle Type:</span>
+            <span>${object.text1}</span>
+          </div>
+        </div>
+        <div class="bottom-row">
+          <div class="field">
+            <span class="bold">Driver Assigned:</span>
+            <span>${object.text2}</span>
+          </div>
+          <div class="field">
+            <span class="bold">Vehicle Registration:</span>
+            <span>${object.text3}</span>
+          </div>
+        </div>
+        <div class="bottom-row">
+          <div class="field">
+            <span class="bold">Patient Name:</span>
+            <span>${object.text4}</span>
+          </div>
+          <div class="field">
+            <span class="bold">Mobile Number:</span>
+            <span>${object.text5}</span>
+          </div>
+        </div>
+      </div>`)
+            }
 
-</html>
-<!-- <?php
-        //}
-        ?> -->
+            document.getElementById('myButton').onclick = function() {
+                location.href = 'http://3007f8e97f51.ngrok.io/MapsBackUp.html'
+            }
+        </script> -->
+    </body>
+
+    </html>
+<?php
+}
+?>
