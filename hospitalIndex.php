@@ -117,7 +117,8 @@ if (isset($_SESSION["uid"])) {
                 document.getElementById('Div1').appendChild(z)
                 //document.getElementById('message1').value = e.data;*/
                 const emptyHeader = document.querySelector('.empty')
-                emptyHeader.remove()
+                if(emptyHeader !== null)
+                  emptyHeader.remove()
                 const docElem = document.querySelector('.main')
                 docElem.insertAdjacentHTML('beforeend',`<div class="card">
         <div class="top-row">
