@@ -104,6 +104,8 @@ if (isset($_SESSION["uid"])) {
 
             // Define the 
             var HospitalName = 'Manipal';
+            var Username = '<?php echo $_SESSION["uid"]; ?>';
+            console.log(Username);
             
             function makeRequest(url, callback) {
                 var request;
@@ -122,7 +124,7 @@ if (isset($_SESSION["uid"])) {
             }
 
             function transmitMessage() {    
-                makeRequest("get_ambulance.php?q="+HospitalName, function(data) {
+                makeRequest("get_ambulance.php?q="+HospitalName+"&r="+Username, function(data) {
 
                     var data = JSON.parse(data.responseText);
                     var x = document.createElement("INPUT");
@@ -131,14 +133,25 @@ if (isset($_SESSION["uid"])) {
                     var y = document.createElement("INPUT");
                     y.setAttribute("type", "text");
                     y.value = data.ambulance_Registration;
+                    var z = document.createElement("INPUT");
+                    z.setAttribute("type", "text");
+                    z.value = data.PatientName;
+                    var w = document.createElement("INPUT");
+                    w.setAttribute("type", "text");
+                    w.value = data.PatientMob;
                     document.body.appendChild(x);
                     document.body.appendChild(y);
+                    document.body.appendChild(z);
+                    document.body.appendChild(w);
+
                     var message = {
                         type: "message",
                         text: document.getElementById("EmergencyType").value,
                         text1: document.getElementById("cars").value,
                         text2: data.driver_name,
                         text3: data.ambulance_Registration,
+                        text4: data.PatientName,
+                        text5: data.PatientMob,
                         date: Date.now()
                     };
                     socket.send(JSON.stringify(message));

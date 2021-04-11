@@ -1,6 +1,6 @@
-<!-- <?php
+<?php
 
-session_start();
+/*session_start();
 
 if (isset($_SESSION["uid"])) {
     $uid = $_SESSION["uid"];
@@ -46,15 +46,16 @@ if (
         print "Error!: " . $e->getMessage() . "<br/>";
         die();
     }
-}
+}*/
 
 ?>
 
 <?php
-if (isset($_SESSION["uid"])) {
-?> -->
+//if (isset($_SESSION["uid"])) {
+?>
 <html>
-  <head>
+
+<head>
     <title>Register</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -120,8 +121,9 @@ if (isset($_SESSION["uid"])) {
         location.href = 'http://3007f8e97f51.ngrok.io/MapsBackUp.html'
       }
     </script> -->
-  </body>
+</body>
+
 </html>
 <!-- <?php
-}
-?> -->
+        //}
+        ?> -->
