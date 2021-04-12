@@ -32,7 +32,7 @@ if (
 
     try {
         $db = new PDO("mysql:host=$host", $user, $password, $options);
-        
+
         $sql_select = "Select * from $t_patients where pat_username =  '$uid' and pat_pwd = '$pwd'";
         //echo "SQL Statement is : $sql_select <BR>";
         //echo "SQL Connection is : $host <BR>";
@@ -106,7 +106,7 @@ if (isset($_SESSION["uid"])) {
             var HospitalName = 'Manipal';
             var Username = '<?php echo $_SESSION["uid"]; ?>';
             console.log(Username);
-            
+
             function makeRequest(url, callback) {
                 var request;
                 if (window.XMLHttpRequest) {
@@ -123,8 +123,8 @@ if (isset($_SESSION["uid"])) {
                 request.send();
             }
 
-            function transmitMessage() {    
-                makeRequest("get_ambulance.php?q="+HospitalName+"&r="+Username, function(data) {
+            function transmitMessage() {
+                makeRequest("get_ambulance.php?q=" + HospitalName + "&r=" + Username, function(data) {
 
                     var data = JSON.parse(data.responseText);
                     var x = document.createElement("INPUT");
@@ -166,3 +166,4 @@ if (isset($_SESSION["uid"])) {
 
     </html>
 <?php } ?>
+
