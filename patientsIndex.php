@@ -112,7 +112,7 @@ if (isset($_SESSION["uid"])) {
                         // Create a new WebSocket.
                         console.log("about to establish web socket connection");
 
-                        var socket = new WebSocket('ws://8ca3082517d7.ngrok.io');
+                        var socket = new WebSocket('ws://594bf9adc584.ngrok.io');
 
                         socket.onopen = function(e) {
                             console.log("Connection established!");
@@ -169,25 +169,26 @@ if (isset($_SESSION["uid"])) {
           <div class="bottom-row">
             <div class="field">
               <span class="bold">Driver Assigned:</span>
-              <span>${object.text2}</span>
+              <span>${data.driver_name}</span>
             </div>
             <div class="field">
               <span class="bold">Vehicle Registration:</span>
-              <span>${object.text3}</span>
+              <span>${data.ambulance_Registration}</span>
             </div>
           </div>
           <div class="bottom-row">
             <div class="field">
               <span class="bold">Patient Name:</span>
-              <span>${object.text4}</span>
+              <span>${data.PatientName}</span>
             </div>
             <div class="field">
               <span class="bold">Mobile Number:</span>
-              <span>${object.text5}</span>
+              <span>${data.PatientMob}</span>
             </div>
           </div>
         </div>`
                                 )
+                                docElem.classList.add('modify')
 
                                 var message = {
                                     type: "message",
