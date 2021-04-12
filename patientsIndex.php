@@ -64,106 +64,150 @@ if (isset($_SESSION["uid"])) {
     <html>
 
     <head>
-        <meta charset="UTF-8">
-        <style>
-            input,
-            button {
-                padding: 10px;
-            }
-        </style>
+        <title>Patients Dashboard</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="./assets/css/patients.css" />
     </head>
 
     <body>
+        <nav>
+            <h3>Webulance</h3>
+            <a href="./logout.php">
+                <img src="./assets/vectors/logout.svg" alt="Logout" height="20" />
+                Logout
+            </a>
+        </nav>
+        <main class="main">
+            <section class="left-pane">
+                <div class="info">
+                    <div>
+                        ① Select the <strong>Type of Emergency</strong> and the
+                        <strong>Type of Vehicle</strong>.
+                    </div>
+                    <div>② Send your request.</div>
+                </div>
+            </section>
+            <section class="right-pane">
+                <div class="message-card">
+                    <h3>Request Ambulance</h3>
+                    <select name="EmergencyType" id="EmergencyType">
+                        <option value="Serious Injuries">Serious Injuries</option>
+                        <option value="Cardiac Arrests">Cardiac arrests</option>
+                        <option value="Respiratory">Respiratory</option>
+                        <option value="Diabetics">Diabetics</option>
+                        <option value="Unconsciousness">Unconsciousness</option>
+                        <option value="Animal Bites">Animal bites</option>
+                        <option value="Infections">Infections</option>
+                    </select>
+                    <select name="cars" id="cars">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                    <button onclick="transmitMessage()">Send</button>
 
-        <select name="EmergencyType" id="EmergencyType">
-            <option value="Serious Injuries">Serious Injuries</option>
-            <option value="Cardiac arrests">Cardiac arrests</option>
-            <option value="Respiratory">Respiratory</option>
-            <option value="Diabetics">Diabetics</option>
-            <option value="Unconsciousness">Unconsciousness</option>
-            <option value="Animal bites">Animal bites</option>
-            <option value="Infections">Infections</option>
-        </select>
-        <select name="cars" id="cars">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-        </select>
-        <button onclick="transmitMessage()">Send</button>
+                    <script>
+                        // Create a new WebSocket.
+                        console.log("about to establish web socket connection");
 
-        <script>
-            // Create a new WebSocket.
-            console.log("about to establish web socket connection");
+                        var socket = new WebSocket('ws://8ca3082517d7.ngrok.io');
 
-            var socket = new WebSocket('ws://8ca3082517d7.ngrok.io');
+                        socket.onopen = function(e) {
+                            console.log("Connection established!");
+                        };
 
-            socket.onopen = function(e) {
-                console.log("Connection established!");
-            };
+                        // Define the 
+                        var HospitalName = 'Manipal';
+                        var Username = '<?php echo $_SESSION["uid"]; ?>';
+                        console.log(Username);
 
-            // Define the 
-            var HospitalName = 'Manipal';
-            var Username = '<?php echo $_SESSION["uid"]; ?>';
-            console.log(Username);
+                        function makeRequest(url, callback) {
+                            var request;
+                            if (window.XMLHttpRequest) {
+                                request = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                            } else {
+                                request = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                            }
+                            request.onreadystatechange = function() {
+                                if (request.readyState == 4 && request.status == 200) {
+                                    callback(request);
+                                }
+                            }
+                            request.open("GET", url, true);
+                            request.send();
+                        }
 
-            function makeRequest(url, callback) {
-                var request;
-                if (window.XMLHttpRequest) {
-                    request = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
-                } else {
-                    request = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
-                }
-                request.onreadystatechange = function() {
-                    if (request.readyState == 4 && request.status == 200) {
-                        callback(request);
-                    }
-                }
-                request.open("GET", url, true);
-                request.send();
-            }
+                        function transmitMessage() {
+                            makeRequest("get_ambulance.php?q=" + HospitalName + "&r=" + Username, function(data) {
 
-            function transmitMessage() {
-                makeRequest("get_ambulance.php?q=" + HospitalName + "&r=" + Username, function(data) {
+                                var data = JSON.parse(data.responseText);
+                                /*var x = document.createElement("INPUT");
+                                x.setAttribute("type", "text");
+                                x.value = data.driver_name;
+                                var y = document.createElement("INPUT");
+                                y.setAttribute("type", "text");
+                                y.value = data.ambulance_Registration;
+                                var z = document.createElement("INPUT");
+                                z.setAttribute("type", "text");
+                                z.value = data.PatientName;
+                                var w = document.createElement("INPUT");
+                                w.setAttribute("type", "text");
+                                w.value = data.PatientMob;
+                                document.body.appendChild(x);
+                                document.body.appendChild(y);
+                                document.body.appendChild(z);
+                                document.body.appendChild(w);*/
 
-                    var data = JSON.parse(data.responseText);
-                    var x = document.createElement("INPUT");
-                    x.setAttribute("type", "text");
-                    x.value = data.driver_name;
-                    var y = document.createElement("INPUT");
-                    y.setAttribute("type", "text");
-                    y.value = data.ambulance_Registration;
-                    var z = document.createElement("INPUT");
-                    z.setAttribute("type", "text");
-                    z.value = data.PatientName;
-                    var w = document.createElement("INPUT");
-                    w.setAttribute("type", "text");
-                    w.value = data.PatientMob;
-                    document.body.appendChild(x);
-                    document.body.appendChild(y);
-                    document.body.appendChild(z);
-                    document.body.appendChild(w);
+                                const emptyHeader = document.querySelector('.info')
+                                if (emptyHeader !== null) emptyHeader.remove()
+                                const docElem = document.querySelector('.left-pane')
+                                docElem.insertAdjacentHTML(
+                                    'beforeend',
+                                    `   <div class="card">
+          <div class="bottom-row">
+            <div class="field">
+              <span class="bold">Driver Assigned:</span>
+              <span>${object.text2}</span>
+            </div>
+            <div class="field">
+              <span class="bold">Vehicle Registration:</span>
+              <span>${object.text3}</span>
+            </div>
+          </div>
+          <div class="bottom-row">
+            <div class="field">
+              <span class="bold">Patient Name:</span>
+              <span>${object.text4}</span>
+            </div>
+            <div class="field">
+              <span class="bold">Mobile Number:</span>
+              <span>${object.text5}</span>
+            </div>
+          </div>
+        </div>`
+                                )
 
-                    var message = {
-                        type: "message",
-                        text: document.getElementById("EmergencyType").value,
-                        text1: document.getElementById("cars").value,
-                        text2: data.driver_name,
-                        text3: data.ambulance_Registration,
-                        text4: data.PatientName,
-                        text5: data.PatientMob,
-                        date: Date.now()
-                    };
-                    socket.send(JSON.stringify(message));
-                });
-            }
+                                var message = {
+                                    type: "message",
+                                    text: document.getElementById("EmergencyType").value,
+                                    text1: document.getElementById("cars").value,
+                                    text2: data.driver_name,
+                                    text3: data.ambulance_Registration,
+                                    text4: data.PatientName,
+                                    text5: data.PatientMob,
+                                    date: Date.now()
+                                };
+                                socket.send(JSON.stringify(message));
+                            });
+                        }
 
-            socket.onmessage = function(e) {
-                alert(e.data);
-            }
-        </script>
+                        socket.onmessage = function(e) {
+                            alert(e.data);
+                        }
+                    </script>
     </body>
 
     </html>
 <?php } ?>
-

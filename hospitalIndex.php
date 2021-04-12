@@ -94,28 +94,6 @@ if (isset($_SESSION["uid"])) {
             socket.onmessage = function(e) {
                 console.log(e.data)
                 var object = JSON.parse(e.data)
-                /*var time = new Date(object.date)
-                var div = document.createElement('div')
-                div.setAttribute('id', 'Div1')
-                div.style.color = 'white'
-                document.body.appendChild(div)
-                //document.getElementById("Div1").appendChild(object);
-                var x = document.createElement('INPUT')
-                x.setAttribute('type', 'text')
-                x.value = object.text
-                var y = document.createElement('INPUT')
-                y.setAttribute('type', 'text')
-                y.value = object.text1
-                var z = document.createElement('INPUT')
-                z.setAttribute('type', 'text')
-                z.value = object.text2
-                document.getElementById('Div1').appendChild(x)
-                var br = document.createElement('BR')
-                document.getElementById('Div1').appendChild(br)
-                document.getElementById('Div1').appendChild(y)
-                document.getElementById('Div1').appendChild(br)
-                document.getElementById('Div1').appendChild(z)
-                //document.getElementById('message1').value = e.data;*/
                 const emptyHeader = document.querySelector('.empty')
                 if(emptyHeader !== null)
                   emptyHeader.remove()
@@ -157,7 +135,7 @@ if (isset($_SESSION["uid"])) {
             document.getElementById('myButton').onclick = function() {
                 location.href = 'http://3007f8e97f51.ngrok.io/MapsBackUp.html'
             }
-        </script> -->
+        </script> 
     </body>
 
     </html>
