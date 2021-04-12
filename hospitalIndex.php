@@ -77,11 +77,11 @@ if (isset($_SESSION["uid"])) {
       // Create a new WebSocket.
       console.log('about to establish web socket connection')
 
-      var socket = new WebSocket('ws://594bf9adc584.ngrok.io')
+      var socket = new WebSocket('ws://777cacb14734.ngrok.io')
 
       socket.onopen = function(e) {
         console.log('Connection established!')
-        socket.send('Hi da')
+        socket.send('ur connected to hospital')
       }
 
       // Define the
@@ -105,7 +105,7 @@ if (isset($_SESSION["uid"])) {
             <span>${object.text}</span>
           </div>
           <div class="field">
-            <span class="bold">Vehicle Type:</span>
+            <span class="bold">Hospital Name:</span>
             <span>${object.text1}</span>
           </div>
         </div>

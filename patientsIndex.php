@@ -83,7 +83,7 @@ if (isset($_SESSION["uid"])) {
                 <div class="info">
                     <div>
                         ① Select the <strong>Type of Emergency</strong> and the
-                        <strong>Type of Vehicle</strong>.
+                        <strong>Hospital</strong>.
                     </div>
                     <div>② Send your request.</div>
                 </div>
@@ -100,11 +100,8 @@ if (isset($_SESSION["uid"])) {
                         <option value="Animal Bites">Animal bites</option>
                         <option value="Infections">Infections</option>
                     </select>
-                    <select name="cars" id="cars">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                    <select name="hospital" id="hospital">
+                        <option value="Manipal">Manipal</option>
                     </select>
                     <button onclick="transmitMessage()">Send</button>
 
@@ -112,7 +109,7 @@ if (isset($_SESSION["uid"])) {
                         // Create a new WebSocket.
                         console.log("about to establish web socket connection");
 
-                        var socket = new WebSocket('ws://594bf9adc584.ngrok.io');
+                        var socket = new WebSocket('ws://777cacb14734.ngrok.io');
 
                         socket.onopen = function(e) {
                             console.log("Connection established!");
@@ -193,7 +190,7 @@ if (isset($_SESSION["uid"])) {
                                 var message = {
                                     type: "message",
                                     text: document.getElementById("EmergencyType").value,
-                                    text1: document.getElementById("cars").value,
+                                    text1: document.getElementById("hospital").value,
                                     text2: data.driver_name,
                                     text3: data.ambulance_Registration,
                                     text4: data.PatientName,
@@ -205,7 +202,7 @@ if (isset($_SESSION["uid"])) {
                         }
 
                         socket.onmessage = function(e) {
-                            alert(e.data);
+                            //alert(e.data);
                         }
                     </script>
     </body>
