@@ -3,7 +3,7 @@
 function get_coordinates($city, $street, $province)
 {
     $address = urlencode($city.','.$street.','.$province);
-    $url = "https://maps.google.com/maps/api/geocode/json?address=".$address."&key=AIzaSyBwfZLkThCCQWYptWELcrp5d9uXtgvywcc";
+    $url = "https://maps.google.com/maps/api/geocode/json?address=".$address."&key=API_KEY";//create .env for API Key and contact @anmolsahu2k
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
