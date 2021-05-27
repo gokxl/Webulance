@@ -29,7 +29,7 @@ function get_coordinates($city, $street, $province)
 
 function GetDrivingDistance($lat1, $lat2, $long1, $long2)
 {
-    $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$lat1.",".$long1."&destinations=".$lat2.",".$long2."&mode=driving&key=AIzaSyBwfZLkThCCQWYptWELcrp5d9uXtgvywcc";
+    $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$lat1.",".$long1."&destinations=".$lat2.",".$long2."&mode=driving&key=API_Key";//create .env for API Key and contact @anmolsahu2k
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
