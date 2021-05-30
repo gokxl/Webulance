@@ -44,7 +44,7 @@
       if (cb.checked == true) {
         document.loginForm.action = 'hospitalIndex.php'
       } else {
-        document.loginForm.action = 'patientsIndex.php'
+        document.loginForm.action = 'Displaylocation.php'
       }
       document.loginForm.submit()
       return true

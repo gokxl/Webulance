@@ -1,41 +1,76 @@
+<?php
+
+session_start();
+if (isset($_SESSION["uid"])) {
+    $uid = $_SESSION["uid"];
+}
+
+if (isset($_SESSION['errorMessage'])) {
+    echo "<script type='text/javascript'>
+            alert('" . $_SESSION['errorMessage'] . "');
+          </script>";
+    //to not make the error message appear again after refresh:
+    unset($_SESSION['errorMessage']);
+}
+
+if (
+    isset($_POST["login"]) && !empty($_POST["uid"])
+    && !empty($_POST["pwd"])
+) {
+    $uid = $_POST['uid'];
+    $pwd = $_POST['pwd'];
+
+    include 'config.php';
+    //set table name based on local or remote connection
+    if ($connection == "local") {
+        $t_patients = "patients";
+    } else {
+        $t_patients = "$database.patients";
+    }
+
+    try {
+        $db = new PDO("mysql:host=$host", $user, $password, $options);
+
+        $sql_select = "Select * from $t_patients where pat_username = '$uid' and pat_pwd = '$pwd'";
+        //echo "SQL Statement is : $sql_select <BR>";
+        //echo "SQL Connection is : $host <BR>";
+
+
+        $stmt = $db->prepare($sql_select);
+        $stmt->execute();
+
+        if ($rows = $stmt->fetch()) {
+            //echo "SQL Statement is : $rows <BR>";
+            $_SESSION['valid'] = TRUE;
+            $_SESSION['uid'] = $_POST["uid"];
+            $_SESSION["pwd"] = $_POST["pwd"];
+        } else {
+            echo '<script> alert("Invalid PatName or Password. Try again");</script>';
+            header('refresh:0; url=./index.php');
+            exit();
+        }
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        die();
+    }
+}
+?>
+
+<?php
+if (isset($_SESSION["uid"])) {
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <title>Google Maps Example</title>
-    <style type="text/css">
-        body {
-            font: normal 14px Verdana;
-        }
-
-        h1 {
-            font-size: 24px;
-        }
-
-        h2 {
-            font-size: 18px;
-        }
-
-        #sidebar {
-            float: right;
-            width: 30%;
-        }
-
-        #main {
-            padding-right: 600px;
-        }
-
-        .infoWindow {
-            width: 220px;
-        }
-    </style>
+    <title>Location Fetch</title>
+    <link rel="stylesheet" href="./assets/css/location.css">
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwfZLkThCCQWYptWELcrp5d9uXtgvywcc&callback=myMap"></script>
     <script type="text/javascript">
-        //<![CDATA[
-
         function makeRequest(url, callback) {
             var request;
             if (window.XMLHttpRequest) {
@@ -54,7 +89,6 @@
 
         var map;
 
-        // Ban Jelačić Square - City Center
         var center = new google.maps.LatLng(12.962180, 77.681427);
 
         var geocoder = new google.maps.Geocoder();
@@ -91,6 +125,7 @@
                             document.getElementById('start').value = results[0].formatted_address
                             var resaddress = results[0].formatted_address.split(",");
                             var count = 0, state, city, street = "";
+                            
                             for (i = (resaddress.length - 2); i >= 0; i--) {
                                 count += 1;
                                 if (count == 1) {
@@ -103,9 +138,11 @@
                                     street = street + resaddress[i];
                                 }
                             }
-                            alert(city);
-                            alert(state);
-                            alert(street);
+                            document.getElementById('city').value = city;
+                            document.getElementById('state').value = state;
+                            // alert(city);
+                            // alert(state);
+                            // alert(street);
                         }
                         function makeRequest1(url, callback) {
                             var request;
@@ -124,8 +161,8 @@
                         }
                         makeRequest("get_disttime.php?q=" + street + "&r=" + city + "&s=" + state, function(data) {
                             var data = JSON.parse(data.responseText);
-                            alert(data.distance);
-                            alert(data.time);
+                            // alert(data.distance);
+                            // alert(data.time);
                         });
                     });
 
@@ -210,30 +247,23 @@
                 }
             });
         }
-//]]>
     </script>
 </head>
-
 <body onload="init();">
-
-    <h1>Places to check out in Zagreb</h1>
-
     <form id="services">
-        Location: <input type="text" id="start" />
-        Destination: <select id="destination" onchange="calculateRoute();"></select>
-        <input type="button" value="Display Directions" onclick="calculateRoute();" />
+        <h3>Updating Your Location</h3>
+        <span>Location:</span><input type="text" id="start" disabled/>
+        <span>City:</span><input type="text" id="city" disabled/>
+        <span>State:</span><input type="text" id="state" disabled/>
+        <span>Destination:</span><select id="destination"></select>
+        <button type="submit">Enter Patient Details</button>
     </form>
-
     <section id="sidebar">
         <div id="directions_panel"></div>
     </section>
-
-    <br> <br> <br>
-
     <section id="main">
         <div id="map_canvas" style="width: 70%; height: 500px;"></div>
     </section>
-
 </body>
-
 </html>
+<?php } ?>

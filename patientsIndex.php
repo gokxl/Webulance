@@ -31,7 +31,7 @@ if (
     try {
         $db = new PDO("mysql:host=$host", $user, $password, $options);
 
-        $sql_select = "Select * from $t_patients where pat_username =  '$uid' and pat_pwd = '$pwd'";
+        $sql_select = "Select * from $t_patients where pat_username = '$uid' and pat_pwd = '$pwd'";
         //echo "SQL Statement is : $sql_select <BR>";
         //echo "SQL Connection is : $host <BR>";
 
@@ -107,7 +107,7 @@ if (isset($_SESSION["uid"])) {
                         // Create a new WebSocket.
                         console.log("about to establish web socket connection");
 
-                        var socket = new WebSocket('ws://e8d01198e913.ngrok.io');
+                        var socket = new WebSocket('http://localhost');
 
                         socket.onopen = function(e) {
                             console.log("Connection established!");
@@ -138,50 +138,33 @@ if (isset($_SESSION["uid"])) {
                             makeRequest("get_ambulance.php?q=" + HospitalName + "&r=" + Username, function(data) {
 
                                 var data = JSON.parse(data.responseText);
-                                /*var x = document.createElement("INPUT");
-                                x.setAttribute("type", "text");
-                                x.value = data.driver_name;
-                                var y = document.createElement("INPUT");
-                                y.setAttribute("type", "text");
-                                y.value = data.ambulance_Registration;
-                                var z = document.createElement("INPUT");
-                                z.setAttribute("type", "text");
-                                z.value = data.PatientName;
-                                var w = document.createElement("INPUT");
-                                w.setAttribute("type", "text");
-                                w.value = data.PatientMob;
-                                document.body.appendChild(x);
-                                document.body.appendChild(y);
-                                document.body.appendChild(z);
-                                document.body.appendChild(w);*/
-
                                 const emptyHeader = document.querySelector('.info')
                                 if (emptyHeader !== null) emptyHeader.remove()
                                 const docElem = document.querySelector('.left-pane')
                                 docElem.insertAdjacentHTML(
                                     'beforeend',
                                     `   <div class="card">
-          <div class="bottom-row">
-            <div class="field">
-              <span class="bold">Driver Assigned:</span>
-              <span>${data.driver_name}</span>
-            </div>
-            <div class="field">
-              <span class="bold">Vehicle Registration:</span>
-              <span>${data.ambulance_Registration}</span>
-            </div>
-          </div>
-          <div class="bottom-row">
-            <div class="field">
-              <span class="bold">Patient Name:</span>
-              <span>${data.PatientName}</span>
-            </div>
-            <div class="field">
-              <span class="bold">Mobile Number:</span>
-              <span>${data.PatientMob}</span>
-            </div>
-          </div>
-        </div>`
+                                        <div class="bottom-row">
+                                            <div class="field">
+                                            <span class="bold">Driver Assigned:</span>
+                                            <span>${data.driver_name}</span>
+                                            </div>
+                                            <div class="field">
+                                            <span class="bold">Vehicle Registration:</span>
+                                            <span>${data.ambulance_Registration}</span>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-row">
+                                            <div class="field">
+                                            <span class="bold">Patient Name:</span>
+                                            <span>${data.PatientName}</span>
+                                            </div>
+                                            <div class="field">
+                                            <span class="bold">Mobile Number:</span>
+                                            <span>${data.PatientMob}</span>
+                                            </div>
+                                        </div>
+                                        </div>`
                                 )
                                 docElem.classList.add('modify')
 
