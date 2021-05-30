@@ -1,8 +1,6 @@
 <?php
 
 session_start();
-
-
 if (isset($_SESSION["uid"])) {
     $uid = $_SESSION["uid"];
 }
@@ -101,7 +99,7 @@ if (isset($_SESSION["uid"])) {
                         <option value="Infections">Infections</option>
                     </select>
                     <select name="hospital" id="hospital">
-                        <option value="Manipal">Manipal</option>
+                        <option value="mhope123">mhope123</option>
                     </select>
                     <button onclick="transmitMessage()">Send</button>
 
@@ -109,7 +107,7 @@ if (isset($_SESSION["uid"])) {
                         // Create a new WebSocket.
                         console.log("about to establish web socket connection");
 
-                        var socket = new WebSocket('ws://777cacb14734.ngrok.io');
+                        var socket = new WebSocket('ws://e8d01198e913.ngrok.io');
 
                         socket.onopen = function(e) {
                             console.log("Connection established!");
@@ -195,6 +193,8 @@ if (isset($_SESSION["uid"])) {
                                     text3: data.ambulance_Registration,
                                     text4: data.PatientName,
                                     text5: data.PatientMob,
+                                    text6: Username,
+                                    text7: "Patient",
                                     date: Date.now()
                                 };
                                 socket.send(JSON.stringify(message));

@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-
 if (isset($_SESSION["uid"])) {
   $uid = $_SESSION["uid"];
 }
@@ -77,18 +76,26 @@ if (isset($_SESSION["uid"])) {
       // Create a new WebSocket.
       console.log('about to establish web socket connection')
 
-      var socket = new WebSocket('ws://777cacb14734.ngrok.io')
+      var socket = new WebSocket('ws://e8d01198e913.ngrok.io')
+
+      var Username = '<?php echo $_SESSION["uid"]; ?>';
+      alert(Username);
+      var message = {
+        type: "message",
+        text6: Username,
+        text7: "Hospital"
+      };
+
 
       socket.onopen = function(e) {
         console.log('Connection established!')
-        socket.send('ur connected to hospital')
+        socket.send(JSON.stringify(message))
       }
 
       // Define the
-      var message = document.getElementById('message')
 
       function transmitMessage() {
-        socket.send(message.value)
+        //socket.send(JSON.stringify(message))
       }
 
       socket.onmessage = function(e) {

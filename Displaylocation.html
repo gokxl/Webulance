@@ -32,7 +32,7 @@
         }
     </style>
     <script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7TAtKUw8VuLhGXXyC_C_YN_NZS2OXBj4&callback=myMap"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwfZLkThCCQWYptWELcrp5d9uXtgvywcc&callback=myMap"></script>
     <script type="text/javascript">
         //<![CDATA[
 
@@ -83,13 +83,50 @@
 
                     var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-                    alert(userLocation);
+                    //alert(userLocation);
 
                     geocoder.geocode({ 'latLng': userLocation }, function (results, status) {
-                        alert(status)
+                        //alert(status)
                         if (status == google.maps.GeocoderStatus.OK) {
                             document.getElementById('start').value = results[0].formatted_address
+                            var resaddress = results[0].formatted_address.split(",");
+                            var count = 0, state, city, street = "";
+                            for (i = (resaddress.length - 2); i >= 0; i--) {
+                                count += 1;
+                                if (count == 1) {
+                                    state = resaddress[i];
+                                }
+                                else if (count == 2) {
+                                    city = resaddress[i];
+                                }
+                                else {
+                                    street = street + resaddress[i];
+                                }
+                            }
+                            alert(city);
+                            alert(state);
+                            alert(street);
                         }
+                        function makeRequest1(url, callback) {
+                            var request;
+                            if (window.XMLHttpRequest) {
+                                request = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                            } else {
+                                request = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                            }
+                            request.onreadystatechange = function () {
+                                if (request.readyState == 4 && request.status == 200) {
+                                    callback(request);
+                                }
+                            }
+                            request.open("GET", url, true);
+                            request.send();
+                        }
+                        makeRequest("get_disttime.php?q=" + street + "&r=" + city + "&s=" + state, function(data) {
+                            var data = JSON.parse(data.responseText);
+                            alert(data.distance);
+                            alert(data.time);
+                        });
                     });
 
 

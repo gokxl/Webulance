@@ -73,69 +73,6 @@ if (isset($_SESSION["isadmin"])) {
     <!-- LOGO -->
     <div class="container-fluid" style="margin-top:10px">
         <div class="row">
-            <div class="col-sm-2">
-                <div class="container ">
-                    <div class="row">
-
-                        <!-- left side nvertical navigation bar starts here -->
-
-                        <nav class="navbar bg-light">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link">Basic</a>
-                                    <nav class="navbar bg-light">
-                                        <ul class="navbar-nav">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="./addMovie.php">Add Movie</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="./addTheatre.php">Add Theatre / Seats</a>
-                                            </li>
-                                        </ul>
-                                    </nav> 
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">Main</a>
-                                    <nav class="navbar bg-light">
-                                        <ul class="navbar-nav">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="./addShow.php">Add Show / Inventory</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="./manageShow.php">Manage Shows</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">Report</a>
-                                    <nav class="navbar bg-light">
-                                        <ul class="navbar-nav">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="./ticketsShow.php">Tickets by Show</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="./collectionTheatre.php">Collection by
-                                                    Theatre</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="./collectionMovie.php">Collection by Movie</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">About us</a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                        <!-- left side nvertical navigation bar ends here -->
-                    </div>
-
-                </div>
-            </div>
-
             <!-- Add Movie Form starts here -->
 
             <div class="container" style=" width:80% ">

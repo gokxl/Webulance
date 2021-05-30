@@ -1,6 +1,5 @@
 <?php
 
-
 namespace MyApp;
 
 use PDO;
@@ -17,6 +16,8 @@ class Socket implements MessageComponentInterface
     public function __construct($httpHost = '0.0.0.0', $port = 8080, $address = '0.0.0.0', LoopInterface $loop = null)
     {
         $this->clients = new \SplObjectStorage;
+        $this->hospitals = [];
+        $this->patients = [];
     }
 
     public function onOpen(ConnectionInterface $conn)
@@ -25,52 +26,40 @@ class Socket implements MessageComponentInterface
         // Store the new connection in $this->clients
         $this->clients->attach($conn);
         //echo "New connection! ({$conn})\n";
+        $this->users[$conn->resourceId] = $conn;
         echo "New connection! ({$conn->resourceId})\n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
 
-        foreach ($this->clients as $client) {
-
-            if ($from->resourceId == $client->resourceId) {
-                continue;
-            }
-
-            /*require 'config.php';
-
-            try {
-
-                $db = new PDO("mysql:host=$host", $user, $password, $options);
-                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                $sth = ($db->query("SELECT * FROM AmbulanceDetails WHERE amb_status = 'on_duty' LIMIT 1 "))->fetch();
-                //$locations = $sth->fetchAll();
-                //echo($sth['amb_driver']);
-
-                echo json_decode(json_encode($sth, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE));
-                
-            } catch (Exception $e) {
-                echo $e->getMessage();
-            }*/
-
-            /*$myObj->name = "John";
-            $myObj->age = 30;
-            $myObj->city = "New York";
-
-            $myJSON = json_encode($myObj);
-
-            echo $myJSON;*/
-            echo "Client $from->resourceId said $msg";
-            //$client->send($myJSON );
-            //$client->send(json_encode($sth, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
-            $client->send("$msg");
+        $data = json_decode($msg);
+        echo $data->text7;
+        switch ($data->text7) {
+            case "Patient":
+                $this->patients[$from->resourceId] = $data->text1;
+                //echo $this->patients[$from->resourceId]."<br>";
+            case "Hospital":
+                $this->hospitals[$from->resourceId] = $data->text6;
+                //echo $this->hospitals[$from->resourceId]."<br>";
         }
+        foreach ($this->hospitals as $key => $value) {
+            echo "value for id $key is $value";
+        }
+        if ($data->text7 == "Patient") {
+            foreach ($this->hospitals as $key => $value) {
+                if ($this->patients[$from->resourceId] == $value) {
+                    $this->users[$key]->send($msg);
+                }
+            }
+        }
+        //$client->send("$msg");
     }
 
     public function onClose(ConnectionInterface $conn)
     {
         $this->clients->detach($conn);
+        unset($this->users[$conn->resourceId]);
 
         echo "Connection {$conn->resourceId} has disconnected\n";
     }
