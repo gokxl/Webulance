@@ -142,9 +142,27 @@ if (isset($_SESSION["uid"])) {
                             document.getElementById('state').value = state;
                             makeRequest("get_disttime.php?q=" + street.trim() + "&r=" + city.trim() + "&s=" + state.trim(), function(data) {
                             var data = JSON.parse(data.responseText);
-                            alert("hi");
-                            console.log(data.distance);
-                            //alert(data.time);
+                            let distances = [];
+                            let times = [];
+                            let names = [];
+
+                            for (const [key, value] of Object.entries(data.distance)) {
+                                distances.push(value);
+                            }
+                            for (const [key, value] of Object.entries(data.time)) {
+                                times.push(value);
+                            }
+                            for (const [key, value] of Object.entries(data.hospital)) {
+                                names.push(value);
+                            }
+
+                            var selectBox = document.getElementById('destination');
+                            let optionString = '';
+                            for(let i = 0; i < names.length; i++) {
+                                optionString = `${names[i]} - ${distances[i]} - ${times[i]}`;
+                                addOption(selectBox, optionString, names[i]);
+                                optionString = '';
+                            }
                         });
                             // alert(city);
                             // alert(state);
@@ -174,16 +192,16 @@ if (isset($_SESSION["uid"])) {
                 });
             }
 
-            makeRequest('get_locations.php', function (data) {
+            // makeRequest('get_locations.php', function (data) {
 
-                var data = JSON.parse(data.responseText);
-                var selectBox = document.getElementById('destination');
+            //     var data = JSON.parse(data.responseText);
+            //     var selectBox = document.getElementById('destination');
 
-                for (var i = 0; i < data.length; i++) {
-                    displayLocation(data[i]);
-                    addOption(selectBox, data[i]['name'], data[i]['address']);
-                }
-            });
+            //     for (var i = 0; i < data.length; i++) {
+            //         displayLocation(data[i]);
+            //         addOption(selectBox, data[i]['name'], data[i]['address']);
+            //     }
+            // });
         }
 
         function addOption(selectBox, text, value) {
