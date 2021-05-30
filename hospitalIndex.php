@@ -79,7 +79,6 @@ if (isset($_SESSION["uid"])) {
       var socket = new WebSocket('ws://localhost:8080')
 
       var Username = '<?php echo $_SESSION["uid"]; ?>';
-      alert(Username);
       var message = {
         type: "message",
         text6: Username,

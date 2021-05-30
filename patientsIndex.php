@@ -122,9 +122,7 @@ $hospital = $_POST['destination'];
                     var HospitalName = 'Manipal';
                     var Username = '<?php echo $_SESSION["uid"]; ?>';
                     var Location = '<?php echo $address; ?>';
-                    alert(Location);
                     var hos = '<?php echo $hos; ?>';
-                    console.log(Username);
 
                     function makeRequest(url, callback) {
                         var request;
@@ -143,6 +141,11 @@ $hospital = $_POST['destination'];
                     }
 
                     function transmitMessage() {
+                        const patName = document.querySelector('#pat-name').value;
+                        if(patName.split(/\W+/).length !== 2 || patName.length == 0) {
+                            window.alert("Please enter the full name of the patient to be admitted");
+                            return;
+                        }
                         makeRequest("get_ambulance.php?q=" + HospitalName + "&r=" + Username, function(data) {
 
                             var data = JSON.parse(data.responseText);
