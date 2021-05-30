@@ -104,9 +104,7 @@ if (isset($_SESSION["uid"])) {
                         <option value="Animal Bites">Animal bites</option>
                         <option value="Infections">Infections</option>
                     </select>
-                    <select name="hospital" id="hospital">
-                        <option value="mhope123">mhope123</option>
-                    </select>
+                    <input type="text" name="patName" id="pat-name" placeholder="Enter Patient Name" />
                     <button onclick="transmitMessage()">Send</button>
 
                     <script>
