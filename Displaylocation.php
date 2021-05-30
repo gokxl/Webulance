@@ -123,6 +123,7 @@ if (isset($_SESSION["uid"])) {
                         //alert(status)
                         if (status == google.maps.GeocoderStatus.OK) {
                             document.getElementById('start').value = results[0].formatted_address
+                            displayLocation(results[0].formatted_address);
                             var resaddress = results[0].formatted_address.split(",");
                             var count = 0, state, city, street = "";
                             
