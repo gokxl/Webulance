@@ -312,13 +312,13 @@ if (isset($_SESSION["uid"])) {
     </head>
 
     <body onload="init();">
-        <form id="services" method="post" action="patientsIndex.php">
+        <form id="services" method="POST" action="patientsIndex.php">
             <h3>Updating Your Location</h3>
-            <span>Location:</span><input name="location" type="text" id="start" disabled />
-            <span>City:</span><input name="city" type="text" id="city" disabled />
-            <span>State:</span><input name="state" type="text" id="state" disabled />
+            <span>Location:</span><input name="location" type="text" id="start" readonly />
+            <span>City:</span><input name="city" type="text" id="city" readonly />
+            <span>State:</span><input name="state" type="text" id="state" readonly />
             <span>Destination:</span><select name="destination" id="destination" onchange="return gethos()"></select>
-            <input type="text" style="display:none" disabled id="hos" name="hos" />
+            <input type="text" style="display:none" readonly id="hos" name="hos" />
             <button type="submit">Enter Patient Details</button>
         </form>
         <section id="sidebar">

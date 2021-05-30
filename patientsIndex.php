@@ -60,96 +60,98 @@ if (
 <?php
 session_start();
 if (isset($_SESSION["uid"])) {
-    $location = $_POST['location'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $hos = $_POST['hos'];
+$address = $_POST['location'];
+$city = $_POST['city'];
+$state = $_POST['state'];
+$hos = $_POST['hos'];
+$hospital = $_POST['destination'];
 ?>
-    <html>
+<html>
 
-    <head>
-        <title>Patients Dashboard</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="./assets/css/patients.css" />
-    </head>
+<head>
+    <title>Patients Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./assets/css/patients.css" />
+</head>
 
-    <body>
-        <nav>
-            <h3>Webulance</h3>
-            <a href="./logout.php">
-                <img src="./assets/vectors/logout.svg" alt="Logout" height="20" />
-                Logout
-            </a>
-        </nav>
-        <main class="main">
-            <section class="left-pane">
-                <div class="info">
-                    <div>
-                        ① Select the <strong>Type of Emergency</strong> and the
-                        <strong>Hospital</strong>.
-                    </div>
-                    <div>② Send your request.</div>
+<body>
+    <nav>
+        <h3>Webulance</h3>
+        <a href="./logout.php">
+            <img src="./assets/vectors/logout.svg" alt="Logout" height="20" />
+            Logout
+        </a>
+    </nav>
+    <main class="main">
+        <section class="left-pane">
+            <div class="info">
+                <div>
+                    ① Select the <strong>Type of Emergency</strong> and the
+                    <strong>Hospital</strong>.
                 </div>
-            </section>
-            <section class="right-pane">
-                <div class="message-card">
-                    <h3>Request Ambulance</h3>
-                    <select name="EmergencyType" id="EmergencyType">
-                        <option value="Serious Injuries">Serious Injuries</option>
-                        <option value="Cardiac Arrests">Cardiac arrests</option>
-                        <option value="Respiratory">Respiratory</option>
-                        <option value="Diabetics">Diabetics</option>
-                        <option value="Unconsciousness">Unconsciousness</option>
-                        <option value="Animal Bites">Animal bites</option>
-                        <option value="Infections">Infections</option>
-                    </select>
-                    <input type="text" name="patName" id="pat-name" placeholder="Enter Patient Name" />
-                    <button onclick="transmitMessage()">Send</button>
+                <div>② Send your request.</div>
+            </div>
+        </section>
+        <section class="right-pane">
+            <div class="message-card">
+                <h3>Request Ambulance</h3>
+                <select name="EmergencyType" id="EmergencyType">
+                    <option value="Serious Injuries">Serious Injuries</option>
+                    <option value="Cardiac Arrests">Cardiac arrests</option>
+                    <option value="Respiratory">Respiratory</option>
+                    <option value="Diabetics">Diabetics</option>
+                    <option value="Unconsciousness">Unconsciousness</option>
+                    <option value="Animal Bites">Animal bites</option>
+                    <option value="Infections">Infections</option>
+                </select>
+                <input type="text" name="patName" id="pat-name" style="padding: 8px" placeholder="Enter Patient Name"  />
+                <button onclick="transmitMessage()">Send</button>
 
-                    <script>
-                        // Create a new WebSocket.
-                        console.log("about to establish web socket connection");
+                <script>
+                    // Create a new WebSocket.
+                    console.log("about to establish web socket connection");
 
-                        var socket = new WebSocket('http://localhost:8080');
+                    var socket = new WebSocket('ws://localhost:8080');
 
-                        socket.onopen = function(e) {
-                            console.log("Connection established!");
-                        };
+                    socket.onopen = function(e) {
+                        console.log("Connection established!");
+                    };
 
-                        // Define the 
-                        var HospitalName = 'Manipal';
-                        var Username = '<?php echo $_SESSION["uid"]; ?>';
-                        var Location = '<?php echo $location; ?>';
-                        var hos = '<?php echo $hos; ?>';
-                        console.log(Username);
+                    // Define the 
+                    var HospitalName = 'Manipal';
+                    var Username = '<?php echo $_SESSION["uid"]; ?>';
+                    var Location = '<?php echo $address; ?>';
+                    alert(Location);
+                    var hos = '<?php echo $hos; ?>';
+                    console.log(Username);
 
-                        function makeRequest(url, callback) {
-                            var request;
-                            if (window.XMLHttpRequest) {
-                                request = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
-                            } else {
-                                request = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
-                            }
-                            request.onreadystatechange = function() {
-                                if (request.readyState == 4 && request.status == 200) {
-                                    callback(request);
-                                }
-                            }
-                            request.open("GET", url, true);
-                            request.send();
+                    function makeRequest(url, callback) {
+                        var request;
+                        if (window.XMLHttpRequest) {
+                            request = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                        } else {
+                            request = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
                         }
+                        request.onreadystatechange = function() {
+                            if (request.readyState == 4 && request.status == 200) {
+                                callback(request);
+                            }
+                        }
+                        request.open("GET", url, true);
+                        request.send();
+                    }
 
-                        function transmitMessage() {
-                            makeRequest("get_ambulance.php?q=" + HospitalName + "&r=" + Username, function(data) {
+                    function transmitMessage() {
+                        makeRequest("get_ambulance.php?q=" + HospitalName + "&r=" + Username, function(data) {
 
-                                var data = JSON.parse(data.responseText);
-                                const emptyHeader = document.querySelector('.info')
-                                if (emptyHeader !== null) emptyHeader.remove()
-                                const docElem = document.querySelector('.left-pane')
-                                docElem.insertAdjacentHTML(
-                                    'beforeend',
-                                    `   <div class="card">
+                            var data = JSON.parse(data.responseText);
+                            const emptyHeader = document.querySelector('.info')
+                            if (emptyHeader !== null) emptyHeader.remove()
+                            const docElem = document.querySelector('.left-pane')
+                            docElem.insertAdjacentHTML(
+                                'beforeend',
+                                `   <div class="card">
                                         <div class="bottom-row">
                                             <div class="field">
                                             <span class="bold">Driver Assigned:</span>
@@ -162,7 +164,7 @@ if (isset($_SESSION["uid"])) {
                                         </div>
                                         <div class="bottom-row">
                                             <div class="field">
-                                            <span class="bold">Patient Name:</span>
+                                            <span class="bold">User Name:</span>
                                             <span>${data.PatientName}</span>
                                             </div>
                                             <div class="field">
@@ -170,34 +172,46 @@ if (isset($_SESSION["uid"])) {
                                             <span>${data.PatientMob}</span>
                                             </div>
                                         </div>
+                                        <div class="bottom-row">
+                                            <div class="field">
+                                            <span class="bold">Admitted Patient:</span>
+                                            <span>${document.getElementById('pat-name').value}</span>
+                                            </div>
+                                            <div class="field">
+                                            <span class="bold">Hospital Name:</span>
+                                            <span>${'<?php echo $hospital; ?>'}</span>
+                                            </div>
+                                        </div>
                                         </div>`
-                                )
-                                docElem.classList.add('modify')
+                            )
+                            docElem.classList.add('modify')
 
-                                var message = {
-                                    type: "message",
-                                    text: hos,
-                                    text1: document.getElementById("hospital").value,
-                                    text2: data.driver_name,
-                                    text3: data.ambulance_Registration,
-                                    text4: data.PatientName,
-                                    text5: data.PatientMob,
-                                    text6: Username,
-                                    text7: "Patient",
-                                    text8: Location, 
-                                    date: Date.now()
-                                };
-                                socket.send(JSON.stringify(message));
-                            });
-                        }
+                            var message = {
+                                type: "message",
+                                text: document.getElementById('EmergencyType').value,
+                                text1: hos,
+                                text2: data.driver_name,
+                                text3: data.ambulance_Registration,
+                                text4: data.PatientName,
+                                text5: data.PatientMob,
+                                text6: Username,
+                                text7: "Patient",
+                                text8: Location,
+                                text9: document.getElementById('pat-name').value,
+                                text10: '<?php echo $hospital; ?>',
+                                date: Date.now()
+                            };
+                            socket.send(JSON.stringify(message));
+                        });
+                    }
 
-                        socket.onmessage = function(e) {
-                            //alert(e.data);
-                        }
-                    </script>
-    </body>
+                    socket.onmessage = function(e) {
+                        //alert(e.data);
+                    }
+                </script>
+</body>
 
-    </html>
+</html>
 <?php } else {
     unset($_SESSION["uid"]);
     unset($_SESSION["pwd"]);
@@ -205,7 +219,7 @@ if (isset($_SESSION["uid"])) {
 
     //echo 'You have cleaned session';
     //header('Refresh: 2; URL = login.php');
-    //header("Refresh: 2; Location: ./index2.php"); 
+    //header("Refresh: 2; Loocation: ./index2.php"); 
     header("Refresh: 1; URL = index.php");
     exit();
-} ?>
+}  ?>

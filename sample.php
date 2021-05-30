@@ -1,6 +1,11 @@
 <?php
+$address = $_POST['location'];
+$city = $_POST['city'];
+$state = $_POST['state'];
+$hos = $_POST['hos'];
 
-$id = "300/A, 5th Cross Rd, 2nd Phase, Ramesh Nagar, Vimanapura";
+echo $hos;  
+/*$id = "300/A, 5th Cross Rd, 2nd Phase, Ramesh Nagar, Vimanapura";
 $id1 = "Bengaluru";
 $id2 = "Karnataka 560037";
 

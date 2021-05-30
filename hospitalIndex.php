@@ -76,7 +76,7 @@ if (isset($_SESSION["uid"])) {
       // Create a new WebSocket.
       console.log('about to establish web socket connection')
 
-      var socket = new WebSocket('ws://e8d01198e913.ngrok.io')
+      var socket = new WebSocket('ws://localhost:8080')
 
       var Username = '<?php echo $_SESSION["uid"]; ?>';
       alert(Username);
@@ -85,7 +85,6 @@ if (isset($_SESSION["uid"])) {
         text6: Username,
         text7: "Hospital"
       };
-
 
       socket.onopen = function(e) {
         console.log('Connection established!')
@@ -113,7 +112,7 @@ if (isset($_SESSION["uid"])) {
           </div>
           <div class="field">
             <span class="bold">Hospital Name:</span>
-            <span>${object.text1}</span>
+            <span>${object.text10}</span>
           </div>
         </div>
         <div class="bottom-row">
@@ -128,12 +127,22 @@ if (isset($_SESSION["uid"])) {
         </div>
         <div class="bottom-row">
           <div class="field">
-            <span class="bold">Patient Name:</span>
+            <span class="bold">User Name:</span>
             <span>${object.text4}</span>
           </div>
           <div class="field">
             <span class="bold">Mobile Number:</span>
             <span>${object.text5}</span>
+          </div>
+        </div>
+        <div class="bottom-row">
+          <div class="field">
+            <span class="bold">Patient Name:</span>
+            <span>${object.text9}</span>
+          </div>
+          <div class="field">
+            <span class="bold">Location:</span>
+            <span>${object.text8}</span>
           </div>
         </div>
       </div>`)
