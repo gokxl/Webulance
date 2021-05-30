@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+/*session_start();
 if (isset($_SESSION["uid"])) {
     $uid = $_SESSION["uid"];
 }
@@ -53,11 +53,17 @@ if (
         print "Error!: " . $e->getMessage() . "<br/>";
         die();
     }
-}
+}*/
+
 ?>
 
 <?php
+session_start();
 if (isset($_SESSION["uid"])) {
+    $location = $_POST['location'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $hos = $_POST['hos'];
 ?>
     <html>
 
@@ -191,4 +197,14 @@ if (isset($_SESSION["uid"])) {
     </body>
 
     </html>
-<?php } ?>
+<?php } else {
+    unset($_SESSION["uid"]);
+    unset($_SESSION["pwd"]);
+    unset($_SESSION["valid"]);
+
+    //echo 'You have cleaned session';
+    //header('Refresh: 2; URL = login.php');
+    //header("Refresh: 2; Location: ./index2.php"); 
+    header("Refresh: 1; URL = index.php");
+    exit();
+} ?>
