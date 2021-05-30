@@ -65,11 +65,11 @@ if (isset($_SESSION["uid"])) {
 <html lang="en">
 
 <head>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwfZLkThCCQWYptWELcrp5d9uXtgvywcc&callback=myMap"></script>
     <meta charset="utf-8" />
     <title>Location Fetch</title>
     <link rel="stylesheet" href="./assets/css/location.css">
-    <script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwfZLkThCCQWYptWELcrp5d9uXtgvywcc&callback=myMap"></script>
     <script type="text/javascript">
         function makeRequest(url, callback) {
             var request;
@@ -193,16 +193,15 @@ if (isset($_SESSION["uid"])) {
                 });
             }
 
-            // makeRequest('get_locations.php', function (data) {
+            makeRequest('get_locations.php', function (data) {
 
-            //     var data = JSON.parse(data.responseText);
-            //     var selectBox = document.getElementById('destination');
+                var data = JSON.parse(data.responseText);
+                var selectBox = document.getElementById('destination');
 
-            //     for (var i = 0; i < data.length; i++) {
-            //         displayLocation(data[i]);
-            //         addOption(selectBox, data[i]['name'], data[i]['address']);
-            //     }
-            // });
+                for (var i = 0; i < data.length; i++) {
+                    displayLocation(data[i]);
+                }
+            });
         }
 
         function addOption(selectBox, text, value) {
