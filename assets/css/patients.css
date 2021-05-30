@@ -128,3 +128,7 @@ button {
   overflow-y: scroll;
   height: 60%;
 }
+
+#pat-name {
+  padding: 8px;
+}
