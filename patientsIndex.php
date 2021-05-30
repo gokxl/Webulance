@@ -113,7 +113,7 @@ if (isset($_SESSION["uid"])) {
                         // Create a new WebSocket.
                         console.log("about to establish web socket connection");
 
-                        var socket = new WebSocket('http://localhost');
+                        var socket = new WebSocket('http://localhost:8080');
 
                         socket.onopen = function(e) {
                             console.log("Connection established!");
@@ -122,6 +122,8 @@ if (isset($_SESSION["uid"])) {
                         // Define the 
                         var HospitalName = 'Manipal';
                         var Username = '<?php echo $_SESSION["uid"]; ?>';
+                        var Location = '<?php echo $location; ?>';
+                        var hos = '<?php echo $hos; ?>';
                         console.log(Username);
 
                         function makeRequest(url, callback) {
@@ -176,7 +178,7 @@ if (isset($_SESSION["uid"])) {
 
                                 var message = {
                                     type: "message",
-                                    text: document.getElementById("EmergencyType").value,
+                                    text: hos,
                                     text1: document.getElementById("hospital").value,
                                     text2: data.driver_name,
                                     text3: data.ambulance_Registration,
@@ -184,6 +186,7 @@ if (isset($_SESSION["uid"])) {
                                     text5: data.PatientMob,
                                     text6: Username,
                                     text7: "Patient",
+                                    text8: Location, 
                                     date: Date.now()
                                 };
                                 socket.send(JSON.stringify(message));
