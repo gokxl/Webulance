@@ -1,20 +1,17 @@
 <?php
 
-//$id = "300/A, 5th Cross Rd, 2nd Phase, Ramesh Nagar, Vimanapura";
-//$id1 = "Bengaluru";
-// $id2 = "Karnataka 560037";
-
-$id = $_GET['q'];
-$id1 = $_GET['r'];
-$id2 = $_GET['s'];
-
-require './config.php';
-$db = new PDO("mysql:host=$host", $user, $password, $options);
-$db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+$id = "300/A, 5th Cross Rd, 2nd Phase, Ramesh Nagar, Vimanapura";
+$id1 = "Bengaluru";
+$id2 = "Karnataka 560037";
 
 //$id = "RameshNagar";
 //$id1 = "Bangalore";
 //$id2 = "Karnataka";
+require './config.php';
+$db = new PDO("mysql:host=$host", $user, $password, $options);
+$db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+
 function get_coordinates($city, $street, $province)
 {
     $address = urlencode($city . ',' . $street . ',' . $province);

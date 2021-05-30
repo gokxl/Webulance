@@ -140,6 +140,12 @@ if (isset($_SESSION["uid"])) {
                             }
                             document.getElementById('city').value = city;
                             document.getElementById('state').value = state;
+                            makeRequest("get_disttime.php?q=" + street.trim() + "&r=" + city.trim() + "&s=" + state.trim(), function(data) {
+                            var data = JSON.parse(data.responseText);
+                            alert("hi");
+                            console.log(data.distance);
+                            //alert(data.time);
+                        });
                             // alert(city);
                             // alert(state);
                             // alert(street);
@@ -159,11 +165,7 @@ if (isset($_SESSION["uid"])) {
                             request.open("GET", url, true);
                             request.send();
                         }
-                        makeRequest("get_disttime.php?q=" + street + "&r=" + city + "&s=" + state, function(data) {
-                            var data = JSON.parse(data.responseText);
-                            // alert(data.distance);
-                            // alert(data.time);
-                        });
+                        
                     });
 
 
