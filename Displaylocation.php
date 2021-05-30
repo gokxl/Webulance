@@ -122,7 +122,7 @@ if (isset($_SESSION["uid"])) {
                     geocoder.geocode({ 'latLng': userLocation }, function (results, status) {
                         //alert(status)
                         if (status == google.maps.GeocoderStatus.OK) {
-                            document.getElementById('start').value = results[0].formatted_address
+                            document.getElementById('start').value = results[0].formatted_address;
                             displayLocation(results[0].formatted_address);
                             var resaddress = results[0].formatted_address.split(",");
                             var count = 0, state, city, street = "";
@@ -211,19 +211,42 @@ if (isset($_SESSION["uid"])) {
             selectBox.options.add(option);
         }
 
+        function displayLocation(location) {
+
+        /*var content = '<div class="infoWindow"><strong>' + location.name + '</strong>'
+            + '<br/>' + location.address
+            + '<br/>' + location.description + '</div>';*/
+
+            console.log(location)
+            geocoder.geocode({ 'address': location }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                        title: location
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.setContent(content);
+                        infowindow.open(map, marker);
+                    });
+                }
+            });
+        }
+
         function displayLocationHospital(location) {
 
-            /*var content = '<div class="infoWindow"><strong>' + location.name + '</strong>'
+            var content = '<div class="infoWindow"><strong>' + location.name + '</strong>'
                 + '<br/>' + location.address
-                + '<br/>' + location.description + '</div>';*/
+                + '<br/>' + location.description + '</div>';
 
-            if (parseInt(location.length) != 0) {
-                geocoder.geocode({ 'address': location }, function (results, status) {
+            if (parseInt(location.lat) == 0) {
+                geocoder.geocode({ 'address': location.address }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var marker = new google.maps.Marker({
                             map: map,
                             position: results[0].geometry.location,
-                            title: location
+                            title: location.name
                         });
 
                         google.maps.event.addListener(marker, 'click', function () {
@@ -247,26 +270,26 @@ if (isset($_SESSION["uid"])) {
             }
         }
 
-        function calculateRoute() {
+        // function calculateRoute() {
 
-            var start = document.getElementById('start').value;
-            var destination = document.getElementById('destination').value;
+        //     var start = document.getElementById('start').value;
+        //     var destination = document.getElementById('destination').value;
 
-            if (start == '') {
-                start = center;
-            }
+        //     if (start == '') {
+        //         start = center;
+        //     }
 
-            var request = {
-                origin: start,
-                destination: destination,
-                travelMode: google.maps.DirectionsTravelMode.DRIVING
-            };
-            directionsService.route(request, function (response, status) {
-                if (status == google.maps.DirectionsStatus.OK) {
-                    directionsDisplay.setDirections(response);
-                }
-            });
-        }
+        //     var request = {
+        //         origin: start,
+        //         destination: destination,
+        //         travelMode: google.maps.DirectionsTravelMode.DRIVING
+        //     };
+        //     directionsService.route(request, function (response, status) {
+        //         if (status == google.maps.DirectionsStatus.OK) {
+        //             directionsDisplay.setDirections(response);
+        //         }
+        //     });
+        // }
     </script>
 </head>
 <body onload="init();">
