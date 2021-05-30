@@ -213,17 +213,17 @@ if (isset($_SESSION["uid"])) {
 
         function displayLocation(location) {
 
-            var content = '<div class="infoWindow"><strong>' + location.name + '</strong>'
+            /*var content = '<div class="infoWindow"><strong>' + location.name + '</strong>'
                 + '<br/>' + location.address
-                + '<br/>' + location.description + '</div>';
+                + '<br/>' + location.description + '</div>';*/
 
-            if (parseInt(location.lat) == 0) {
-                geocoder.geocode({ 'address': location.address }, function (results, status) {
+            if (parseInt(location.length) != 0) {
+                geocoder.geocode({ 'address': location }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var marker = new google.maps.Marker({
                             map: map,
                             position: results[0].geometry.location,
-                            title: location.name
+                            title: location
                         });
 
                         google.maps.event.addListener(marker, 'click', function () {
