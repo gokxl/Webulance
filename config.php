@@ -19,9 +19,9 @@
     }else{
 
         $database = "Webulance";        # Get these database details from
-        $host =  "127.0.0.1;dbname=Webulance";  # the web console
-        $user     = "root";   #
-        $password = "password";   #
+        $host =  "localhost;dbname=Webulance";  # the web console
+        $user     = "imovies";   #
+        $password = "Vit2020@project";   #
         $port     = 3306;           #
         $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');         
     }

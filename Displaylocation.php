@@ -123,6 +123,7 @@ if (isset($_SESSION["uid"])) {
                         //alert(status)
                         if (status == google.maps.GeocoderStatus.OK) {
                             document.getElementById('start').value = results[0].formatted_address
+                            displayLocation(results[0].formatted_address);
                             var resaddress = results[0].formatted_address.split(",");
                             var count = 0, state, city, street = "";
                             
@@ -212,17 +213,17 @@ if (isset($_SESSION["uid"])) {
 
         function displayLocationHospital(location) {
 
-            var content = '<div class="infoWindow"><strong>' + location.name + '</strong>'
+            /*var content = '<div class="infoWindow"><strong>' + location.name + '</strong>'
                 + '<br/>' + location.address
-                + '<br/>' + location.description + '</div>';
+                + '<br/>' + location.description + '</div>';*/
 
-            if (parseInt(location.lat) == 0) {
-                geocoder.geocode({ 'address': location.address }, function (results, status) {
+            if (parseInt(location.length) != 0) {
+                geocoder.geocode({ 'address': location }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var marker = new google.maps.Marker({
                             map: map,
                             position: results[0].geometry.location,
-                            title: location.name
+                            title: location
                         });
 
                         google.maps.event.addListener(marker, 'click', function () {
