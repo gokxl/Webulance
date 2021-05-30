@@ -198,7 +198,7 @@ if (isset($_SESSION["uid"])) {
                 var selectBox = document.getElementById('destination');
 
                 for (var i = 0; i < data.length; i++) {
-                    displayLocation(data[i]);
+                    displayLocationHospital(data[i]);
                 }
             });
         }
@@ -210,7 +210,7 @@ if (isset($_SESSION["uid"])) {
             selectBox.options.add(option);
         }
 
-        function displayLocation(location) {
+        function displayLocationHospital(location) {
 
             var content = '<div class="infoWindow"><strong>' + location.name + '</strong>'
                 + '<br/>' + location.address
