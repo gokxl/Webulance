@@ -148,7 +148,7 @@ if (isset($_SESSION["uid"])) {
                                     let distances = [];
                                     let times = [];
                                     let names = [];
-                                    hospitals=data.hospital;
+                                    hospitals = data.hospital;
 
                                     for (const [key, value] of Object.entries(data.distance)) {
                                         distances.push(value);
@@ -217,9 +217,8 @@ if (isset($_SESSION["uid"])) {
 
             function displayLocation(location) {
 
-                /*var content = '<div class="infoWindow"><strong>' + location.name + '</strong>'
-                    + '<br/>' + location.address
-                    + '<br/>' + location.description + '</div>';*/
+                var content = '<div class="infoWindow"><strong>' + "your position" + '</strong>' +
+                    '<br/>' + location + '</div>';
 
                 console.log(location)
                 geocoder.geocode({
@@ -229,7 +228,7 @@ if (isset($_SESSION["uid"])) {
                         var marker = new google.maps.Marker({
                             map: map,
                             position: results[0].geometry.location,
-                            title: location
+                            title: "My location"
                         });
 
                         google.maps.event.addListener(marker, 'click', function() {

@@ -119,7 +119,7 @@ $hospital = $_POST['destination'];
                     };
 
                     // Define the 
-                    var HospitalName = 'Manipal';
+                    var HospitalName = '<?php echo $hospital; ?>';
                     var Username = '<?php echo $_SESSION["uid"]; ?>';
                     var Location = '<?php echo $address; ?>';
                     var hos = '<?php echo $hos; ?>';
